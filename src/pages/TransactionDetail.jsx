@@ -1,23 +1,27 @@
-import { useEffect, useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import Layout from '../components/Layout';
-import Button from '../components/Button';
-import Badge from '../components/Badge';
-import TypeToggle from '../components/TypeToggle';
-import { FieldLabel, TextInput, SelectInput } from '../components/FormField';
-import { useTransactions } from '../hooks/useTransactions';
-import { CATEGORIES } from '../data/categories';
-import { formatCurrency, formatDateForDisplay } from '../utils/format';
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import Layout from "../components/Layout";
+import Button from "../components/Button";
+import Modal from "../components/Modal";
+import Badge from "../components/Badge";
+import TypeToggle from "../components/TypeToggle";
+import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
+import { useTransactions } from "../hooks/useTransactions";
+import { CATEGORIES } from "../data/categories";
+import { formatCurrency, formatDateForDisplay } from "../utils/format";
 
 export default function TransactionDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { getTransaction, updateTransaction, deleteTransaction } = useTransactions();
+  const { getTransaction, updateTransaction, deleteTransaction } =
+    useTransactions();
   const transaction = getTransaction(id);
 
   const [isEditing, setIsEditing] = useState(false);
   const [form, setForm] = useState(null);
   const [errors, setErrors] = useState({});
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   useEffect(() => {
     if (transaction) {
@@ -34,10 +38,10 @@ export default function TransactionDetail() {
   if (!transaction) {
     return (
       <Layout variant="modal" extraTab="View Transaction">
-        <p style={{ color: 'var(--color-text-primary)' }}>
+        <p style={{ color: "var(--color-text-primary)" }}>
           This transaction doesn't exist or was already deleted.
         </p>
-        <Button className="mt-6" onClick={() => navigate('/')}>
+        <Button className="mt-6" onClick={() => navigate("/")}>
           Back to Dashboard
         </Button>
       </Layout>
@@ -50,12 +54,13 @@ export default function TransactionDetail() {
 
   function validate() {
     const nextErrors = {};
-    if (!form.description.trim()) nextErrors.description = 'Description is required.';
-    if (!form.date) nextErrors.date = 'Date is required.';
-    if (!form.category) nextErrors.category = 'Category is required.';
+    if (!form.description.trim())
+      nextErrors.description = "Description is required.";
+    if (!form.date) nextErrors.date = "Date is required.";
+    if (!form.category) nextErrors.category = "Category is required.";
     const amountNumber = Number(form.amount);
     if (!form.amount || Number.isNaN(amountNumber) || amountNumber <= 0) {
-      nextErrors.amount = 'Enter an amount greater than 0.';
+      nextErrors.amount = "Enter an amount greater than 0.";
     }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -75,23 +80,44 @@ export default function TransactionDetail() {
   }
 
   function handleDelete() {
-    if (window.confirm('Delete this transaction? This can’t be undone.')) {
-      deleteTransaction(transaction.id);
-      navigate('/');
-    }
+    setIsDeleteOpen(true);
   }
 
-  const isExpense = transaction.type === 'Expense';
+  function confirmDelete() {
+    deleteTransaction(transaction.id);
+    navigate("/");
+  }
+
+  function discardChanges() {
+    setIsEditing(false);
+  }
+
+  const isExpense = transaction.type === "Expense";
 
   return (
     <Layout variant="modal" extraTab="View Transaction">
+      <Modal
+        isOpen={isDeleteOpen}
+        onClose={() => setIsDeleteOpen(false)}
+        onConfirm={confirmDelete}
+        title="Delete this transaction?"
+        message="This action can’t be undone."
+        confirmLabel="Delete"
+        cancelLabel="Cancel"
+      />
       {isEditing ? (
         <form onSubmit={handleSave} noValidate>
           <div className="flex items-center justify-between">
-            <h1 className="font-display text-xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
+            <h1
+              className="font-display text-xl font-bold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               <span
                 className="mr-3 inline-block w-1 align-middle"
-                style={{ height: '1.1em', backgroundColor: 'var(--color-btn-primary-bg)' }}
+                style={{
+                  height: "1.1em",
+                  backgroundColor: "var(--color-btn-primary-bg)",
+                }}
               />
               Edit Transaction
             </h1>
@@ -102,7 +128,7 @@ export default function TransactionDetail() {
             <TextInput
               id="description"
               value={form.description}
-              onChange={(v) => setField('description', v)}
+              onChange={(v) => setField("description", v)}
               error={errors.description}
             />
           </div>
@@ -114,13 +140,16 @@ export default function TransactionDetail() {
                 id="date"
                 type="date"
                 value={form.date}
-                onChange={(v) => setField('date', v)}
+                onChange={(v) => setField("date", v)}
                 error={errors.date}
               />
             </div>
             <div>
               <FieldLabel>Type</FieldLabel>
-              <TypeToggle value={form.type} onChange={(v) => setField('type', v)} />
+              <TypeToggle
+                value={form.type}
+                onChange={(v) => setField("type", v)}
+              />
             </div>
 
             <div>
@@ -128,7 +157,7 @@ export default function TransactionDetail() {
               <SelectInput
                 id="category"
                 value={form.category}
-                onChange={(v) => setField('category', v)}
+                onChange={(v) => setField("category", v)}
                 options={CATEGORIES}
                 error={errors.category}
               />
@@ -141,14 +170,28 @@ export default function TransactionDetail() {
                 step="0.01"
                 min="0"
                 value={form.amount}
-                onChange={(v) => setField('amount', v)}
+                onChange={(v) => setField("amount", v)}
                 error={errors.amount}
               />
             </div>
           </div>
 
+          <Modal
+            isOpen={isEditOpen}
+            onClose={() => setIsEditOpen(false)}
+            onConfirm={discardChanges}
+            title="Discard edits?"
+            message="Your edits haven't been saved. Leaving now will discard them."
+            confirmLabel="Discard"
+            cancelLabel="Keep editing"
+          />
+
           <div className="mt-8 flex justify-end gap-3">
-            <Button type="button" variant="secondary" onClick={() => setIsEditing(false)}>
+            <Button
+              type="button"
+              variant="secondary"
+              onClick={() => setIsEditOpen(true)}
+            >
               Cancel
             </Button>
             <Button type="submit" variant="primary">
@@ -159,10 +202,16 @@ export default function TransactionDetail() {
       ) : (
         <>
           <div className="flex items-center justify-between">
-            <h1 className="font-display text-xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
+            <h1
+              className="font-display text-xl font-bold"
+              style={{ color: "var(--color-text-primary)" }}
+            >
               <span
                 className="mr-3 inline-block w-1 align-middle"
-                style={{ height: '1.1em', backgroundColor: 'var(--color-btn-primary-bg)' }}
+                style={{
+                  height: "1.1em",
+                  backgroundColor: "var(--color-btn-primary-bg)",
+                }}
               />
               {transaction.description}
             </h1>
@@ -174,15 +223,23 @@ export default function TransactionDetail() {
           <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <FieldLabel>Date</FieldLabel>
-              <TextInput id="date-view" value={formatDateForDisplay(transaction.date)} readOnly />
+              <TextInput
+                id="date-view"
+                value={formatDateForDisplay(transaction.date)}
+                readOnly
+              />
             </div>
             <div>
               <FieldLabel>Type</FieldLabel>
               <div
                 className="w-fit rounded-lg px-4 py-2 text-sm font-semibold"
                 style={{
-                  backgroundColor: isExpense ? 'var(--color-expense-bg)' : 'var(--color-income-bg)',
-                  color: isExpense ? 'var(--color-expense-text)' : 'var(--color-income-text)',
+                  backgroundColor: isExpense
+                    ? "var(--color-expense-bg)"
+                    : "var(--color-income-bg)",
+                  color: isExpense
+                    ? "var(--color-expense-text)"
+                    : "var(--color-income-text)",
                 }}
               >
                 {transaction.type}
@@ -197,18 +254,28 @@ export default function TransactionDetail() {
             </div>
             <div>
               <FieldLabel>Amount</FieldLabel>
-              <TextInput id="amount-view" value={formatCurrency(transaction.amount)} readOnly />
+              <TextInput
+                id="amount-view"
+                value={formatCurrency(transaction.amount)}
+                readOnly
+              />
             </div>
           </div>
 
           <div className="mt-10 flex items-center justify-between">
-            <p className="text-sm italic" style={{ color: 'var(--color-text-muted)' }}>
+            <p
+              className="text-sm italic"
+              style={{ color: "var(--color-text-muted)" }}
+            >
               "Tame thy tempers." – Kier Eagan
             </p>
             <Button
               variant="secondary"
               onClick={handleDelete}
-              style={{ borderColor: 'var(--color-expense-text)', color: 'var(--color-expense-text)' }}
+              style={{
+                borderColor: "var(--color-expense-text)",
+                color: "var(--color-expense-text)",
+              }}
             >
               Delete
             </Button>

@@ -1,19 +1,20 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import Layout from '../components/Layout';
-import Button from '../components/Button';
-import TypeToggle from '../components/TypeToggle';
-import { FieldLabel, TextInput, SelectInput } from '../components/FormField';
-import { useTransactions } from '../hooks/useTransactions';
-import { CATEGORIES } from '../data/categories';
-import { todayISO } from '../utils/format';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Layout from "../components/Layout";
+import Button from "../components/Button";
+import Modal from "../components/Modal";
+import TypeToggle from "../components/TypeToggle";
+import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
+import { useTransactions } from "../hooks/useTransactions";
+import { CATEGORIES } from "../data/categories";
+import { todayISO } from "../utils/format";
 
 const EMPTY_FORM = {
-  description: '',
+  description: "",
   date: todayISO(),
-  type: 'Expense',
-  category: '',
-  amount: '',
+  type: "Expense",
+  category: "",
+  amount: "",
 };
 
 export default function AddTransaction() {
@@ -21,6 +22,7 @@ export default function AddTransaction() {
   const navigate = useNavigate();
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   function setField(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -28,12 +30,13 @@ export default function AddTransaction() {
 
   function validate() {
     const nextErrors = {};
-    if (!form.description.trim()) nextErrors.description = 'Description is required.';
-    if (!form.date) nextErrors.date = 'Date is required.';
-    if (!form.category) nextErrors.category = 'Category is required.';
+    if (!form.description.trim())
+      nextErrors.description = "Description is required.";
+    if (!form.date) nextErrors.date = "Date is required.";
+    if (!form.category) nextErrors.category = "Category is required.";
     const amountNumber = Number(form.amount);
     if (!form.amount || Number.isNaN(amountNumber) || amountNumber <= 0) {
-      nextErrors.amount = 'Enter an amount greater than 0.';
+      nextErrors.amount = "Enter an amount greater than 0.";
     }
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
@@ -50,20 +53,35 @@ export default function AddTransaction() {
       category: form.category,
       amount: Number(form.amount),
     });
-    navigate('/');
+    navigate("/");
   }
 
   function handleDiscard() {
-    navigate('/');
+    setIsModalOpen(true);
   }
 
   return (
     <Layout variant="modal" extraTab="Add Transaction">
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={() => navigate("/")}
+        title="Discard this transaction?"
+        message="Your entries haven't been saved. Leaving now will discard them."
+        confirmLabel="Discard"
+        cancelLabel="Keep Editing"
+      />
       <form onSubmit={handleSubmit} noValidate>
-        <h1 className="font-display text-xl font-bold" style={{ color: 'var(--color-text-primary)' }}>
+        <h1
+          className="font-display text-xl font-bold"
+          style={{ color: "var(--color-text-primary)" }}
+        >
           <span
             className="mr-3 inline-block w-1 align-middle"
-            style={{ height: '1.1em', backgroundColor: 'var(--color-btn-primary-bg)' }}
+            style={{
+              height: "1.1em",
+              backgroundColor: "var(--color-btn-primary-bg)",
+            }}
           />
           New Transaction
         </h1>
@@ -73,7 +91,7 @@ export default function AddTransaction() {
           <TextInput
             id="description"
             value={form.description}
-            onChange={(v) => setField('description', v)}
+            onChange={(v) => setField("description", v)}
             placeholder="e.g. Grocery Run"
             error={errors.description}
           />
@@ -86,13 +104,16 @@ export default function AddTransaction() {
               id="date"
               type="date"
               value={form.date}
-              onChange={(v) => setField('date', v)}
+              onChange={(v) => setField("date", v)}
               error={errors.date}
             />
           </div>
           <div>
             <FieldLabel>Type</FieldLabel>
-            <TypeToggle value={form.type} onChange={(v) => setField('type', v)} />
+            <TypeToggle
+              value={form.type}
+              onChange={(v) => setField("type", v)}
+            />
           </div>
 
           <div>
@@ -100,7 +121,7 @@ export default function AddTransaction() {
             <SelectInput
               id="category"
               value={form.category}
-              onChange={(v) => setField('category', v)}
+              onChange={(v) => setField("category", v)}
               options={CATEGORIES}
               placeholder="Select a category"
               error={errors.category}
@@ -114,7 +135,7 @@ export default function AddTransaction() {
               step="0.01"
               min="0"
               value={form.amount}
-              onChange={(v) => setField('amount', v)}
+              onChange={(v) => setField("amount", v)}
               placeholder="₱0.00"
               error={errors.amount}
             />
@@ -122,7 +143,10 @@ export default function AddTransaction() {
         </div>
 
         <div className="mt-8 flex items-center justify-between">
-          <p className="text-sm italic" style={{ color: 'var(--color-text-muted)' }}>
+          <p
+            className="text-sm italic"
+            style={{ color: "var(--color-text-muted)" }}
+          >
             "Tame thy tempers." – Kier Eagan
           </p>
           <div className="flex gap-3">

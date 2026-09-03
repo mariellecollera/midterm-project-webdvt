@@ -1,8 +1,10 @@
 import { useMemo } from "react";
 import Layout from "../components/Layout";
+import Widget from "../components/Widget";
 import ThemeToggle from "../components/ThemeToggle";
 import { useTransactions } from "../hooks/useTransactions";
 import { formatCurrency } from "../utils/format";
+import StatBox from "../components/StatBox";
 
 export default function Summary() {
   const { transactions } = useTransactions();
@@ -49,72 +51,25 @@ export default function Summary() {
         aria-hidden="true"
       />
 
-      <div
-        className="mt-6 rounded-2xl px-5 py-5 sm:px-8 sm:py-7"
-        style={{ border: "1.5px solid var(--color-border)" }}
-      >
-        <div
-          className="flex items-center justify-between rounded-xl px-5 py-3"
-          style={{ border: "1.5px solid var(--color-border)" }}
-        >
-          <span
-            className="font-display text-lg"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Expenses Breakdown
-          </span>
-          <span
-            className="font-display text-sm font-bold tracking-widest"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            LUMON
-          </span>
-        </div>
-
-        <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <div>
-            <div
-              className="rounded-lg px-4 py-2 text-center text-sm"
-              style={{
-                border: "1.5px solid var(--color-border)",
-                color: "var(--color-text-primary)",
-              }}
-            >
-              Total Expenses
-            </div>
-            <div
-              className="mt-2 rounded-lg px-4 py-3 text-center text-lg font-bold font-display"
-              style={{
-                border: "1.5px solid var(--color-border)",
-                color: "var(--color-text-primary)",
-              }}
-            >
-              {formatCurrency(totalExpenses)}
-            </div>
+      <div className="mt-6">
+        <Widget title="Expenses Breakdown">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <StatBox
+              label="Total Expenses"
+              value={formatCurrency(totalExpenses)}
+              valueColor="var(--color-text-primary)"
+            ></StatBox>
+            {topCategories.map((row) => (
+              <div key={row.category}>
+                <StatBox
+                  label={row.category}
+                  value={`${row.percent}%`}
+                  valueColor="var(--color-text-primary)"
+                ></StatBox>
+              </div>
+            ))}
           </div>
-          {topCategories.map((row) => (
-            <div key={row.category}>
-              <div
-                className="rounded-lg px-4 py-2 text-center text-sm"
-                style={{
-                  border: "1.5px solid var(--color-border)",
-                  color: "var(--color-text-primary)",
-                }}
-              >
-                {row.category}
-              </div>
-              <div
-                className="mt-2 rounded-lg px-4 py-3 text-center text-lg font-bold font-display"
-                style={{
-                  border: "1.5px solid var(--color-border)",
-                  color: "var(--color-text-primary)",
-                }}
-              >
-                {row.percent}%
-              </div>
-            </div>
-          ))}
-        </div>
+        </Widget>
       </div>
 
       <div className="mt-8">

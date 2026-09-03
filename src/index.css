@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   LUMON Personal Budget Tracker — Global Design Tokens
+   Fonts: Michroma (display/logo), Microgamma D Extended (logo fallback --
+   commercial font, not bundled; add the .woff2 to src/assets/fonts and
+   uncomment the @font-face below if you own a license), Helvetica (body)
+   ========================================================================== */
+
+@font-face {
+  font-family: "Microgamma D Extended";
+  src: local("Microgamma D Extended"), local("Eurostile Extended");
+  font-weight: 700;
+  font-display: swap;
+}
+
+:root {
+  --font-display:
+    "Michroma", "Microgamma D Extended", "Arial Narrow", sans-serif;
+  --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+
+  /* ---- Light theme (default) ---- */
+  --color-bg-app: #eaf4f1;
+  --color-bg-card: #ffffff;
+  --color-bg-input: #eef6fb;
+  --color-bg-hero-outline: #0f2a57;
+
+  --color-text-primary: #0f2a57;
+  --color-text-secondary: #5b6b82;
+  --color-text-muted: #94a3b8;
+  --color-text-on-accent: #ffffff;
+
+  --color-border: #0f2a57;
+  --color-border-soft: #d7e3ee;
+
+  --color-tab-inactive-bg: #8fadc9;
+  --color-tab-inactive-text: #ffffff;
+  --color-tab-active-bg: #0e2247;
+  --color-tab-active-text: #ffffff;
+
+  --color-btn-primary-bg: #0e2247;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-secondary-bg: transparent;
+  --color-btn-secondary-text: #0f2a57;
+  --color-btn-secondary-border: #0f2a57;
+
+  --color-expense-bg: #fbd9d4;
+  --color-expense-text: #c4392b;
+  --color-income-bg: #d9efdc;
+  --color-income-text: #2e8b4f;
+
+  --color-badge-bg: #eef0f4;
+  --color-badge-text: #33415c;
+
+  --color-modal-bg: #eaf4f1;
+
+  --shadow-card: 0 1px 2px rgba(15, 42, 87, 0.06);
+}
+
+[data-theme="dark"] {
+  --color-bg-app: #0a0e27;
+  --color-bg-card: #12193a;
+  --color-bg-input: #1b2348;
+  --color-bg-hero-outline: #c9d6ec;
+
+  --color-text-primary: #eef2fb;
+  --color-text-secondary: #9aa6c9;
+  --color-text-muted: #6b76a0;
+  --color-text-on-accent: #ffffff;
+
+  --color-border: #3c4a7a;
+  --color-border-soft: #2a3562;
+
+  --color-tab-inactive-bg: #2a3562;
+  --color-tab-inactive-text: #c9d6ec;
+  --color-tab-active-bg: #4a6fa5;
+  --color-tab-active-text: #ffffff;
+
+  --color-btn-primary-bg: #4a6fa5;
+  --color-btn-primary-text: #ffffff;
+  --color-btn-secondary-bg: transparent;
+  --color-btn-secondary-text: #c9d6ec;
+  --color-btn-secondary-border: #4a6fa5;
+
+  --color-expense-bg: #402232;
+  --color-expense-text: #ff9c8f;
+  --color-income-bg: #163726;
+  --color-income-text: #7fe0a0;
+
+  --color-badge-bg: #1e2650;
+  --color-badge-text: #c4cde8;
+
+  --color-modal-bg: #0a0e27;
+
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  background-color: var(--color-bg-app);
+  color: var(--color-text-primary);
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* subtle focus ring, accessible on both themes */
+:focus-visible {
+  outline: 2px solid var(--color-btn-primary-bg);
+  outline-offset: 2px;
+}

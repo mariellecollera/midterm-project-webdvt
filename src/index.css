@@ -63,12 +63,12 @@
   --color-bg-input: #1b2348;
   --color-bg-hero-outline: #c9d6ec;
 
-  --color-text-primary: #eef2fb;
+  --color-text-primary: #bef9f8;
   --color-text-secondary: #9aa6c9;
   --color-text-muted: #6b76a0;
   --color-text-on-accent: #ffffff;
 
-  --color-border: #3c4a7a;
+  --color-border: #bef9f8;
   --color-border-soft: #2a3562;
 
   --color-tab-inactive-bg: #2a3562;
@@ -76,8 +76,8 @@
   --color-tab-active-bg: #4a6fa5;
   --color-tab-active-text: #ffffff;
 
-  --color-btn-primary-bg: #4a6fa5;
-  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #bef9f8;
+  --color-btn-primary-text: #12193a;
   --color-btn-secondary-bg: transparent;
   --color-btn-secondary-text: #c9d6ec;
   --color-btn-secondary-border: #4a6fa5;

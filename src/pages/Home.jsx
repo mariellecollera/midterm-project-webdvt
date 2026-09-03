@@ -1,14 +1,15 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
+import Widget from "../components/Widget";
 import StatBox from "../components/StatBox";
+import { formatCurrency } from "../utils/format";
 import SearchBar from "../components/SearchBar";
 import Dropdown from "../components/Dropdown";
 import Button from "../components/Button";
 import TransactionCard from "../components/TransactionCard";
 import { useTransactions } from "../hooks/useTransactions";
 import { CATEGORIES } from "../data/categories";
-import { formatCurrency } from "../utils/format";
 
 const TYPE_OPTIONS = [
   { value: "All", label: "All Types" },
@@ -58,29 +59,8 @@ export default function Dashboard() {
 
   return (
     <Layout variant="panel">
-      <div
-        className="rounded-2xl px-5 py-5 sm:px-8 sm:py-7"
-        style={{ border: "1.5px solid var(--color-border)" }}
-      >
-        <div
-          className="flex items-center justify-between rounded-xl px-5 py-3"
-          style={{ border: "1.5px solid var(--color-border)" }}
-        >
-          <span
-            className="font-display text-lg"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Personal Budget Tracker
-          </span>
-          <span
-            className="font-display text-sm font-bold tracking-widest"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            LUMON
-          </span>
-        </div>
-
-        <div className="mt-6 flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+      <Widget>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <h1
               className="font-display text-xl font-bold"
@@ -120,7 +100,7 @@ export default function Dashboard() {
             />
           </div>
         </div>
-      </div>
+      </Widget>
 
       <div className="mt-8 flex items-center justify-between">
         <h2

@@ -8,6 +8,7 @@ import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
 import { useTransactions } from "../hooks/useTransactions";
 import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";
+import { useToast } from "../context/ToastContext";
 
 const EMPTY_FORM = {
   description: "",
@@ -20,6 +21,7 @@ const EMPTY_FORM = {
 export default function AddTransaction() {
   const { addTransaction } = useTransactions();
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -53,6 +55,7 @@ export default function AddTransaction() {
       category: form.category,
       amount: Number(form.amount),
     });
+    showToast("Transaction added successfully!");
     navigate("/");
   }
 

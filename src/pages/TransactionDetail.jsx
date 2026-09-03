@@ -9,12 +9,14 @@ import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
 import { useTransactions } from "../hooks/useTransactions";
 import { CATEGORIES } from "../data/categories";
 import { formatCurrency, formatDateForDisplay } from "../utils/format";
+import { useToast } from "../context/ToastContext";
 
 export default function TransactionDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { getTransaction, updateTransaction, deleteTransaction } =
     useTransactions();
+  const { showToast } = useToast();
   const transaction = getTransaction(id);
 
   const [isEditing, setIsEditing] = useState(false);
@@ -77,6 +79,7 @@ export default function TransactionDetail() {
       amount: Number(form.amount),
     });
     setIsEditing(false);
+    showToast("Transaction updated successfully!");
   }
 
   function handleDelete() {
@@ -85,11 +88,13 @@ export default function TransactionDetail() {
 
   function confirmDelete() {
     deleteTransaction(transaction.id);
+    showToast("Transaction deleted successfully!");
     navigate("/");
   }
 
   function discardChanges() {
     setIsEditing(false);
+    showToast("Changes discarded.");
   }
 
   const isExpense = transaction.type === "Expense";

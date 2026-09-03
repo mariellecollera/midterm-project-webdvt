@@ -11,7 +11,7 @@ export default function StatBox({ label, value, valueColor }) {
         {label}
       </div>
       <div
-        className="mt-2 px-4 py-3 text-center text-lg font-bold font-display"
+        className="mt-2 px-4 py-3 text-center text-md font-bold font-display"
         style={{
           border: "1.5px solid var(--color-border)",
           color: valueColor || "var(--color-text-primary)",

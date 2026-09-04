@@ -68,7 +68,11 @@ export default function AddTransaction() {
   useClickOutside(cardRef, handleDiscard, !isModalOpen);
 
   return (
-    <Layout variant="modal" extraTab="Add Transaction">
+    <Layout
+      variant="modal"
+      extraTab="Add Transaction"
+      clickOutsideRef={cardRef}
+    >
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -78,7 +82,7 @@ export default function AddTransaction() {
         confirmLabel="Discard"
         cancelLabel="Keep Editing"
       />
-      <form ref={cardRef} onSubmit={handleSubmit} noValidate>
+      <form onSubmit={handleSubmit} noValidate>
         <h1
           className="font-display text-xl font-bold"
           style={{ color: "var(--color-text-primary)" }}

@@ -11,7 +11,12 @@ const TABS = [
  * * Home/Summary. `variant="modal"` renders the centered floating-card
  * treatment used by Add Transaction / Transaction Detail.
  */
-export default function Layout({ children, variant = "panel", extraTab }) {
+export default function Layout({
+  children,
+  variant = "panel",
+  extraTab,
+  clickOutsideRef,
+}) {
   return (
     <div
       className="min-h-screen"
@@ -64,6 +69,7 @@ export default function Layout({ children, variant = "panel", extraTab }) {
         </nav>
 
         <div
+          ref={clickOutsideRef}
           className="p-6"
           style={{
             backgroundColor: "var(--color-tab-active-bg)",

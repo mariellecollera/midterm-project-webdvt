@@ -110,7 +110,11 @@ export default function TransactionDetail() {
   const isExpense = transaction.type === "Expense";
 
   return (
-    <Layout variant="modal" extraTab="View Transaction">
+    <Layout
+      variant="modal"
+      extraTab="View Transaction"
+      clickOutsideRef={editFormRef}
+    >
       <Modal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}
@@ -121,7 +125,7 @@ export default function TransactionDetail() {
         cancelLabel="Cancel"
       />
       {isEditing ? (
-        <form ref={editFormRef} onSubmit={handleSave} noValidate>
+        <form onSubmit={handleSave} noValidate>
           <div className="flex items-center justify-between">
             <h1
               className="font-display text-xl font-bold"

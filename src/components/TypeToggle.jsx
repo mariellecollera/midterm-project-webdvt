@@ -1,9 +1,7 @@
-const OPTIONS = ['Income', 'Expense'];
-
-export default function TypeToggle({ value, onChange }) {
+export default function TypeToggle({ choices, value, onChange }) {
   return (
     <div className="flex gap-2">
-      {OPTIONS.map((option) => {
+      {choices.map((option) => {
         const active = value === option;
         return (
           <button
@@ -12,9 +10,13 @@ export default function TypeToggle({ value, onChange }) {
             onClick={() => onChange(option)}
             className="flex-1 rounded-xl py-3 text-sm font-semibold transition-colors"
             style={{
-              border: '1.5px solid var(--color-border)',
-              backgroundColor: active ? 'var(--color-btn-primary-bg)' : 'transparent',
-              color: active ? 'var(--color-btn-primary-text)' : 'var(--color-text-primary)',
+              border: "1.5px solid var(--color-border)",
+              backgroundColor: active
+                ? "var(--color-btn-primary-bg)"
+                : "transparent",
+              color: active
+                ? "var(--color-btn-primary-text)"
+                : "var(--color-text-primary)",
             }}
           >
             {option}

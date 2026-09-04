@@ -11,6 +11,7 @@ import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { formatCurrency, formatDateForDisplay } from "../utils/format";
 import { useToast } from "../context/ToastContext";
+import { TYPES } from "../data/types";
 
 export default function TransactionDetail() {
   const { id } = useParams();
@@ -166,6 +167,7 @@ export default function TransactionDetail() {
             <div>
               <FieldLabel>Type</FieldLabel>
               <TypeToggle
+                choices={TYPES}
                 value={form.type}
                 onChange={(v) => setField("type", v)}
               />

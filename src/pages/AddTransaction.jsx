@@ -10,6 +10,7 @@ import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";
 import { useToast } from "../context/ToastContext";
+import { TYPES } from "../data/types";
 
 const EMPTY_FORM = {
   description: "",
@@ -122,6 +123,7 @@ export default function AddTransaction() {
           <div>
             <FieldLabel>Type</FieldLabel>
             <TypeToggle
+              choices={TYPES}
               value={form.type}
               onChange={(v) => setField("type", v)}
             />

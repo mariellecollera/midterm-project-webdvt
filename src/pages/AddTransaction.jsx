@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
@@ -6,6 +6,7 @@ import Modal from "../components/Modal";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
 import { useTransactions } from "../hooks/useTransactions";
+import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";
 import { useToast } from "../context/ToastContext";
@@ -25,6 +26,7 @@ export default function AddTransaction() {
   const [form, setForm] = useState(EMPTY_FORM);
   const [errors, setErrors] = useState({});
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const cardRef = useRef(null);
 
   function setField(field, value) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -63,6 +65,8 @@ export default function AddTransaction() {
     setIsModalOpen(true);
   }
 
+  useClickOutside(cardRef, handleDiscard, !isModalOpen);
+
   return (
     <Layout variant="modal" extraTab="Add Transaction">
       <Modal
@@ -74,7 +78,7 @@ export default function AddTransaction() {
         confirmLabel="Discard"
         cancelLabel="Keep Editing"
       />
-      <form onSubmit={handleSubmit} noValidate>
+      <form ref={cardRef} onSubmit={handleSubmit} noValidate>
         <h1
           className="font-display text-xl font-bold"
           style={{ color: "var(--color-text-primary)" }}

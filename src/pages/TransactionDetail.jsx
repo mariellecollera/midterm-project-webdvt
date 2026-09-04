@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
@@ -7,6 +7,7 @@ import Badge from "../components/Badge";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
 import { useTransactions } from "../hooks/useTransactions";
+import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { formatCurrency, formatDateForDisplay } from "../utils/format";
 import { useToast } from "../context/ToastContext";
@@ -24,6 +25,7 @@ export default function TransactionDetail() {
   const [errors, setErrors] = useState({});
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isEditOpen, setIsEditOpen] = useState(false);
+  const editFormRef = useRef(null);
 
   useEffect(() => {
     if (transaction) {
@@ -36,6 +38,14 @@ export default function TransactionDetail() {
       });
     }
   }, [transaction]);
+
+  // While editing, show the discard-edits modal when the user clicks
+  // outside the card. Paused while any modal is already open.
+  useClickOutside(
+    editFormRef,
+    () => setIsEditOpen(true),
+    isEditing && !isEditOpen && !isDeleteOpen,
+  );
 
   if (!transaction) {
     return (
@@ -111,7 +121,7 @@ export default function TransactionDetail() {
         cancelLabel="Cancel"
       />
       {isEditing ? (
-        <form onSubmit={handleSave} noValidate>
+        <form ref={editFormRef} onSubmit={handleSave} noValidate>
           <div className="flex items-center justify-between">
             <h1
               className="font-display text-xl font-bold"

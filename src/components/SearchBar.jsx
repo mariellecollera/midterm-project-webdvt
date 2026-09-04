@@ -1,12 +1,13 @@
+import { Search } from "lucide-react";
+
 export default function SearchBar({ value, onChange }) {
   return (
     <div className="relative flex-1">
-      <span
-        className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm"
+      <Search
+        size={16}
+        className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2"
         style={{ color: 'var(--color-text-secondary)' }}
-      >
-        ⌕
-      </span>
+      />
       <input
         type="text"
         value={value}

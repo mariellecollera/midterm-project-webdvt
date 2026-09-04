@@ -83,7 +83,7 @@ export default function Dashboard() {
             </p>
           </div>
 
-          <div className="grid grid-cols-3 gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <StatBox
               label="Current Balance"
               value={formatCurrency(balance)}
@@ -92,6 +92,12 @@ export default function Dashboard() {
                   ? "var(--color-expense-text)"
                   : "var(--color-text-primary)"
               }
+            />
+            <span
+              className="h-8 w-1 self-center"
+              style={{
+                backgroundColor: "var(--color-btn-primary-bg)",
+              }}
             />
             <StatBox label="Total Income" value={formatCurrency(totalIncome)} />
             <StatBox

@@ -1,3 +1,5 @@
+import { ChevronDown } from 'lucide-react';
+
 export default function Dropdown({ value, onChange, options, ariaLabel }) {
   return (
     <div className="relative">
@@ -19,12 +21,11 @@ export default function Dropdown({ value, onChange, options, ariaLabel }) {
           </option>
         ))}
       </select>
-      <span
-        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-xs"
-        style={{ color: "var(--color-text-primary)" }}
-      >
-        ▾
-      </span>
+      <ChevronDown
+        size={14}
+        className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2"
+        style={{ color: 'var(--color-text-primary)' }}
+      />
     </div>
   );
 }

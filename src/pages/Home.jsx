@@ -102,7 +102,7 @@ export default function Dashboard() {
         </div>
       </Widget>
 
-      <div className="mt-8 flex items-center justify-between">
+      <div className="mt-8 flex items-start justify-between">
         <h2
           className="font-display text-lg"
           style={{ color: "var(--color-text-primary)" }}

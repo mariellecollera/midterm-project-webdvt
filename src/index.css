@@ -73,14 +73,14 @@
 
   --color-tab-inactive-bg: #2a3562;
   --color-tab-inactive-text: #c9d6ec;
-  --color-tab-active-bg: #4a6fa5;
+  --color-tab-active-bg: #8bb6bc;
   --color-tab-active-text: #ffffff;
 
   --color-btn-primary-bg: #bef9f8;
   --color-btn-primary-text: #12193a;
   --color-btn-secondary-bg: transparent;
   --color-btn-secondary-text: #c9d6ec;
-  --color-btn-secondary-border: #4a6fa5;
+  --color-btn-secondary-border: #8bb6bc;
 
   --color-expense-bg: #402232;
   --color-expense-text: #ff9c8f;

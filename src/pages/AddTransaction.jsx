@@ -11,6 +11,7 @@ import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";
 import { useToast } from "../context/ToastContext";
 import { TYPES } from "../data/types";
+import { ArrowLeft } from "lucide-react";
 
 const EMPTY_FORM = {
   description: "",
@@ -83,6 +84,14 @@ export default function AddTransaction() {
         confirmLabel="Discard"
         cancelLabel="Keep Editing"
       />
+      <Button
+        variant="secondary"
+        onClick={() => navigate(-1)}
+        style={{ padding: 0, border: "none", marginBottom: "1rem" }}
+      >
+        <ArrowLeft size={16} aria-hidden="true" />
+        Back
+      </Button>
       <form onSubmit={handleSubmit} noValidate>
         <h1
           className="font-display text-xl font-bold"

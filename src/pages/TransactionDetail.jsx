@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
@@ -55,6 +56,7 @@ export default function TransactionDetail() {
           This transaction doesn't exist or was already deleted.
         </p>
         <Button className="mt-6" onClick={() => navigate("/")}>
+          <ArrowLeft size={16} aria-hidden="true" />
           Back to Dashboard
         </Button>
       </Layout>
@@ -223,6 +225,14 @@ export default function TransactionDetail() {
         </form>
       ) : (
         <>
+          <Button
+            variant="secondary"
+            onClick={() => navigate(-1)}
+            style={{ padding: 0, border: "none", marginBottom: "1rem" }}
+          >
+            <ArrowLeft size={16} aria-hidden="true" />
+            Back
+          </Button>
           <div className="flex items-center justify-between">
             <h1
               className="font-display text-xl font-bold"
@@ -237,22 +247,16 @@ export default function TransactionDetail() {
               />
               {transaction.description}
             </h1>
-            <Button variant="primary" onClick={() => setIsEditing(true)}>
-              Edit
-            </Button>
           </div>
 
           <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <FieldLabel>Date</FieldLabel>
-              <TextInput
-                id="date-view"
-                value={formatDateForDisplay(transaction.date)}
-                readOnly
-              />
+              {formatDateForDisplay(transaction.date)}
             </div>
             <div>
               <FieldLabel>Type</FieldLabel>
+
               <div
                 className="w-fit rounded-lg px-4 py-2 text-sm font-semibold"
                 style={{
@@ -270,17 +274,11 @@ export default function TransactionDetail() {
 
             <div>
               <FieldLabel>Category</FieldLabel>
-              <div>
-                <Badge>{transaction.category}</Badge>
-              </div>
+              <Badge>{transaction.category}</Badge>
             </div>
             <div>
               <FieldLabel>Amount</FieldLabel>
-              <TextInput
-                id="amount-view"
-                value={formatCurrency(transaction.amount)}
-                readOnly
-              />
+              {formatCurrency(transaction.amount)}
             </div>
           </div>
 
@@ -291,17 +289,21 @@ export default function TransactionDetail() {
             >
               "Tame thy tempers." – Kier Eagan
             </p>
-
-            <Button
-              variant="secondary"
-              onClick={handleDelete}
-              style={{
-                borderColor: "var(--color-expense-text)",
-                color: "var(--color-expense-text)",
-              }}
-            >
-              Delete
-            </Button>
+            <div className="flex gap-3">
+              <Button variant="primary" onClick={() => setIsEditing(true)}>
+                Edit
+              </Button>
+              <Button
+                variant="secondary"
+                onClick={handleDelete}
+                style={{
+                  borderColor: "var(--color-expense-text)",
+                  color: "var(--color-expense-text)",
+                }}
+              >
+                Delete
+              </Button>
+            </div>
           </div>
         </>
       )}

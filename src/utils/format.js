@@ -62,7 +62,7 @@ export function formatDisplayDate(iso) {
   const d = parseISO(iso);
   return d.toLocaleDateString("en-US", {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
   });
 }

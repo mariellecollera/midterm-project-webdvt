@@ -70,7 +70,7 @@ export default function Layout({
 
         <div
           ref={clickOutsideRef}
-          className="p-6"
+          className="p-8"
           style={{
             backgroundColor: "var(--color-tab-active-bg)",
             borderRadius: "0 2rem 0 0",

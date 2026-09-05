@@ -76,13 +76,15 @@ export default function Dashboard() {
         </div>
       </Widget>
 
-      <div className="mt-8 flex items-start justify-between">
-        <h2
-          className="font-display text-lg"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          Transactions
-        </h2>
+      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="w-full sm:w-auto">
+          <h2
+            className="font-display text-lg"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            Transactions
+          </h2>
+        </div>
         <Link to="/add">
           <Button variant="primary">+ Add Transaction</Button>
         </Link>

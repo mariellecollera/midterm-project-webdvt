@@ -11,7 +11,7 @@ export function formatNumericDate(isoDate) {
 }
 
 export function todayISO() {
-  return new Date().toISOString().slice(0, 10);
+  return localISO(new Date());
 }
 
 /* ---------- date range helpers for Summary filtering ---------- */
@@ -21,29 +21,36 @@ function parseISO(iso) {
   return new Date(y, m - 1, d);
 }
 
+function localISO(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export function startOfWeek(iso) {
   const d = parseISO(iso);
   const day = d.getDay(); // 0 = Sunday
   d.setDate(d.getDate() - day);
-  return d.toISOString().slice(0, 10);
+  return localISO(d);
 }
 
 export function endOfWeek(iso) {
   const d = parseISO(startOfWeek(iso));
   d.setDate(d.getDate() + 6);
-  return d.toISOString().slice(0, 10);
+  return localISO(d);
 }
 
 export function startOfMonth(iso) {
   const d = parseISO(iso);
   d.setDate(1);
-  return d.toISOString().slice(0, 10);
+  return localISO(d);
 }
 
 export function endOfMonth(iso) {
   const d = parseISO(iso);
   d.setMonth(d.getMonth() + 1, 0); // last day of current month
-  return d.toISOString().slice(0, 10);
+  return localISO(d);
 }
 
 export function shiftDate(iso, filter, direction) {
@@ -51,7 +58,7 @@ export function shiftDate(iso, filter, direction) {
   if (filter === "Daily") d.setDate(d.getDate() + direction);
   else if (filter === "Weekly") d.setDate(d.getDate() + direction * 7);
   else d.setMonth(d.getMonth() + direction);
-  return d.toISOString().slice(0, 10);
+  return localISO(d);
 }
 
 export function isWithinRange(dateISO, startISO, endISO) {

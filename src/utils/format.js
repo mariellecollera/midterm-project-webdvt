@@ -3,7 +3,7 @@ export function formatCurrency(amount) {
   return `₱${value.toLocaleString("en-PH", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 }
 
-export function formatDateForDisplay(isoDate) {
+export function formatNumericDate(isoDate) {
   if (!isoDate) return "";
   const [year, month, day] = isoDate.split("-");
   if (!year || !month || !day) return isoDate;

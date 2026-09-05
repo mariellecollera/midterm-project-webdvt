@@ -29,7 +29,6 @@ export default function TypeToggle({ choices, value, onChange }) {
               color: active
                 ? "var(--color-btn-primary-text)"
                 : "var(--color-text-primary)",
-              cursor: "pointer",
             }}
           >
             {option}

@@ -116,12 +116,16 @@ export default function Summary() {
             <ChevronRight size={20} />
           </button>
         </div>
-        <div className="w-full sm:w-64">
-          <TypeToggle
-            choices={FILTERS}
-            value={filter}
-            onChange={handleFilterChange}
-          />
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="w-full sm:w-64">
+            <TypeToggle
+              choices={FILTERS}
+              value={filter}
+              onChange={handleFilterChange}
+            />
+          </div>
+
+          <ThemeToggle />
         </div>
       </div>
 

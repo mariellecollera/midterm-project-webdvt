@@ -172,6 +172,23 @@ export default function Summary() {
                 ))}
               </div>
             )}
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <StatBox
+                label="Total Expenses"
+                value={formatCurrency(totalExpenses)}
+                valueColor="var(--color-text-primary)"
+              />
+
+              {topCategories.map((row) => (
+                <div key={row.category}>
+                  <StatBox
+                    label={row.category}
+                    value={`${row.percent}%`}
+                    valueColor="var(--color-text-primary)"
+                  ></StatBox>
+                </div>
+              ))}
+            </div>
           </div>
         </Widget>
       </div>

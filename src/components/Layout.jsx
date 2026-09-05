@@ -25,10 +25,10 @@ export default function Layout({
       <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6">
         <div className="mb-1 pl-1">
           <span
-            className="font-display text-lg tracking-wide"
+            className="font-display text-sm tracking-wide"
             style={{ color: "var(--color-text-primary)" }}
           >
-            LUMON
+            Microdata Refinement
           </span>
         </div>
 

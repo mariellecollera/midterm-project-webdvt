@@ -2,11 +2,11 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import Widget from "../components/Widget";
-import StatBox from "../components/StatBox";
 import { formatCurrency } from "../utils/format";
 import SearchBar from "../components/SearchBar";
 import Dropdown from "../components/Dropdown";
 import Button from "../components/Button";
+import { ArrowRight } from "lucide-react";
 import TransactionCard from "../components/TransactionCard";
 import { useTransactions } from "../hooks/useTransactions";
 import { CATEGORIES } from "../data/categories";
@@ -60,9 +60,9 @@ export default function Dashboard() {
   return (
     <Layout variant="panel">
       <Widget title="Current Balance">
-        <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-wrap items-baseline sm:justify-between gap-2">
           <div
-            className="flex flex-wrap items-center text-2xl font-bold gap-3"
+            className="w-full sm:w-auto flex flex-wrap items-center text-2xl font-bold gap-3"
             style={{
               fontFamily: "var(--font-display)",
               color:
@@ -73,6 +73,12 @@ export default function Dashboard() {
           >
             {formatCurrency(balance)}
           </div>
+          <Link to="/summary">
+            <Button variant="secondary" style={{ padding: 0, border: "none" }}>
+              View Summary
+              <ArrowRight size={16} aria-hidden="true" />
+            </Button>
+          </Link>
         </div>
       </Widget>
 

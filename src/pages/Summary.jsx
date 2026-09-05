@@ -63,6 +63,8 @@ export default function Summary() {
     return { totalExpenses: total, totalIncome: income, byCategory: rows };
   }, [periodTransactions]);
 
+  const topCategories = byCategory.slice(0, 3);
+
   const label = useMemo(() => {
     if (filter === "Daily") return formatDisplayDate(currentDate);
     if (filter === "Weekly")
@@ -88,9 +90,9 @@ export default function Summary() {
   }
 
   return (
-    <Layout variant="panel">
+    <Layout variant="panel" extraTab="Summary">
       <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-center gap-2">
           <button
             type="button"
             onClick={goPrev}
@@ -128,29 +130,59 @@ export default function Summary() {
           <ThemeToggle />
         </div>
       </div>
+      <div className="mt-6">
+        <Widget title="Budget Summary">
+          <div className="mt-4 text-center"></div>
+        </Widget>
+      </div>
 
       <div className="mt-6">
-        <Widget title="Expenses per Category">
-          <div className="mt-8">
+        <Widget title="Category Breakdown">
+          <div className="mt-4 text-center">
             {byCategory.length === 0 ? (
               <p
                 className="mt-6 text-sm"
                 style={{ color: "var(--color-text-secondary)" }}
               >
-                No expenses in this period - try a different range.
+                No transactions logged in this period.
               </p>
             ) : (
-              <div className="mt-5 flex flex-col gap-4">
+              <div className="mt-4 flex flex-col gap-4">
+                <h3 className="text-left text-sm font-display">
+                  Top Categories
+                </h3>
+                <div className="flex gap-3">
+                  {topCategories.map((row) => (
+                    <div key={row.category} className="min-w-0 flex-1">
+                      <StatBox
+                        label={row.category}
+                        value={row.percent + "%"}
+                        valueColor="var(--color-text-primary)"
+                      ></StatBox>
+                    </div>
+                  ))}
+                </div>
+                <h3 className="text-left text-sm font-display">
+                  Expenses by Category
+                </h3>
                 {byCategory.map((row) => (
-                  <div key={row.category} className="flex items-center gap-4">
-                    <span
-                      className="w-32 shrink-0 text-sm font-medium"
-                      style={{ color: "var(--color-text-primary)" }}
-                    >
-                      {row.category}
-                    </span>
+                  <div key={row.category} className=" text-left">
+                    <div className="flex items-center justify-between gap-4">
+                      <span
+                        className="text-sm font-semibold"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
+                        {row.category}
+                      </span>
+                      <span
+                        className="text-sm font-bold"
+                        style={{ color: "var(--color-text-primary)" }}
+                      >
+                        {formatCurrency(row.amount)}
+                      </span>
+                    </div>
                     <div
-                      className="h-9 flex-1 overflow-hidden rounded-md"
+                      className="mt-2 h-5 overflow-hidden "
                       style={{ backgroundColor: "var(--color-badge-bg)" }}
                       role="progressbar"
                       aria-valuenow={row.percent}
@@ -159,39 +191,17 @@ export default function Summary() {
                       aria-label={`${row.category} share of expenses`}
                     >
                       <div
-                        className="flex h-full items-center justify-center text-xs font-semibold"
+                        className="h-full  transition-[width] duration-300"
                         style={{
                           width: `${row.percent}%`,
                           backgroundColor: "var(--color-btn-primary-bg)",
-                          color: "var(--color-btn-primary-text)",
-                          minWidth: "2.5rem",
                         }}
-                      >
-                        {row.percent}%
-                      </div>
+                      />
                     </div>
-                    <span
-                      className="w-28 shrink-0 text-right text-sm font-semibold"
-                      style={{ color: "var(--color-text-primary)" }}
-                    >
-                      {formatCurrency(row.amount)}
-                    </span>
                   </div>
                 ))}
               </div>
             )}
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <StatBox
-                label="Total Expenses"
-                value={formatCurrency(totalExpenses)}
-                valueColor="var(--color-text-primary)"
-              />
-              <StatBox
-                label="Total Income"
-                value={formatCurrency(totalIncome)}
-                valueColor="var(--color-text-primary)"
-              />
-            </div>
           </div>
         </Widget>
       </div>

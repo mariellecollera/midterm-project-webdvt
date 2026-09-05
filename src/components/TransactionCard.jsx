@@ -29,7 +29,7 @@ function TransactionCard({ transaction }) {
         </p>
         <div className="mt-2 flex items-center gap-2">
           <span
-            className="text-sm"
+            className="text-xs"
             style={{ color: "var(--color-text-secondary)" }}
           >
             {formatDisplayDate(transaction.date)}

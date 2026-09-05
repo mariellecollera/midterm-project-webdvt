@@ -24,6 +24,7 @@
   --color-bg-card: #ffffff;
   --color-bg-input: #eef6fb;
   --color-bg-hero-outline: #0f2a57;
+  --color-transaction-card-bg: #f9fcff;
 
   --color-text-primary: #0f2a57;
   --color-text-secondary: #5b6b82;
@@ -59,9 +60,10 @@
 
 [data-theme="dark"] {
   --color-bg-app: #0a0e27;
-  --color-bg-card: #12193a;
+  --color-bg-card: #0a0e27;
   --color-bg-input: #1b2348;
   --color-bg-hero-outline: #c9d6ec;
+  --color-transaction-card-bg: #12193a;
 
   --color-text-primary: #eef2fb;
   --color-text-secondary: #9aa6c9;
@@ -73,14 +75,14 @@
 
   --color-tab-inactive-bg: #2a3562;
   --color-tab-inactive-text: #c9d6ec;
-  --color-tab-active-bg: #4a6fa5;
+  --color-tab-active-bg: #8fadc9;
   --color-tab-active-text: #ffffff;
 
-  --color-btn-primary-bg: #4a6fa5;
+  --color-btn-primary-bg: #8fadc9;
   --color-btn-primary-text: #ffffff;
   --color-btn-secondary-bg: transparent;
   --color-btn-secondary-text: #c9d6ec;
-  --color-btn-secondary-border: #4a6fa5;
+  --color-btn-secondary-border: #8fadc9;
 
   --color-expense-bg: #402232;
   --color-expense-text: #ff9c8f;

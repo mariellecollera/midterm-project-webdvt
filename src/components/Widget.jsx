@@ -2,7 +2,10 @@ export default function Widget({ title, children }) {
   return (
     <div
       className="rounded-2xl px-5 py-5 sm:px-8 sm:py-7"
-      style={{ border: "1.5px solid var(--color-border)" }}
+      style={{
+        border: "1.5px solid var(--color-border)",
+        backgroundColor: "var(--color-transaction-card-bg)",
+      }}
     >
       <div
         className="flex items-center justify-between px-5 py-3"

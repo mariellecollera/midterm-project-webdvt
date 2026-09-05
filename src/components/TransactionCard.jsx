@@ -18,7 +18,10 @@ function TransactionCard({ transaction }) {
     <Link
       to={`/transaction/${transaction.id}`}
       className="flex items-center justify-between rounded-2xl px-5 py-4 transition-transform hover:-translate-y-0.5"
-      style={{ border: "1.5px solid var(--color-border)" }}
+      style={{
+        border: "1.5px solid var(--color-border)",
+        backgroundColor: "var(--color-transaction-card-bg)",
+      }}
     >
       <div className="min-w-0">
         <p

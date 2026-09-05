@@ -22,7 +22,7 @@ export default function Layout({
       className="min-h-screen"
       style={{ backgroundColor: "var(--color-bg-app)" }}
     >
-      <div className="mx-auto max-w-5xl px-4 pt-6 sm:px-6">
+      <div className="mx-auto max-w-5xl px-2 py-6 sm:px-6">
         <div className="mb-1 pl-1">
           <span
             className="font-display text-sm tracking-wide"
@@ -39,7 +39,7 @@ export default function Layout({
               to={tab.to}
               end={tab.end}
               className={({ isActive }) =>
-                `px-8 py-3 text-sm font-semibold font-display transition-colors rounded-t-xl -mb-px ${
+                `px-8 py-3 text-sm font-semibold font-display transition-colors rounded-t-xl ${
                   isActive ? "z-10" : ""
                 }`
               }
@@ -50,6 +50,7 @@ export default function Layout({
                 color: isActive
                   ? "var(--color-tab-active-text)"
                   : "var(--color-tab-inactive-text)",
+                boxShadow: isActive ? "none" : "var(--shadow-tab)",
               })}
             >
               {tab.label}
@@ -70,7 +71,7 @@ export default function Layout({
 
         <div
           ref={clickOutsideRef}
-          className="p-8"
+          className="px-3 py-6 md:p-8"
           style={{
             backgroundColor: "var(--color-tab-active-bg)",
             borderRadius: "0 2rem 0 0",
@@ -93,7 +94,7 @@ export default function Layout({
               style={{ minHeight: "calc(100vh - 96px)" }}
             >
               <div
-                className="h-fit w-full max-w-2xl rounded-2xl p-6 sm:p-9"
+                className="h-fit w-full max-w-lg rounded-2xl p-6 sm:p-9"
                 style={{
                   backgroundColor: "var(--color-bg-card)",
                   boxShadow: "var(--shadow-card)",

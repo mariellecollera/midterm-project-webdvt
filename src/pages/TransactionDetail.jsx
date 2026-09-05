@@ -258,7 +258,7 @@ export default function TransactionDetail() {
               <FieldLabel>Type</FieldLabel>
 
               <div
-                className="w-fit rounded-lg px-4 py-2 text-sm font-semibold"
+                className="w-fit rounded-lg px-4 py-2 text-xs font-semibold"
                 style={{
                   backgroundColor: isExpense
                     ? "var(--color-expense-bg)"

@@ -1,7 +1,7 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
 import Badge from "./Badge";
-import { formatCurrency, formatDateForDisplay } from "../utils/format";
+import { formatCurrency, formatDisplayDate } from "../utils/format";
 
 /**
  * Performance note: Dashboard re-renders on every keystroke in the search
@@ -32,7 +32,7 @@ function TransactionCard({ transaction }) {
             className="text-sm"
             style={{ color: "var(--color-text-secondary)" }}
           >
-            {formatDateForDisplay(transaction.date)}
+            {formatDisplayDate(transaction.date)}
           </span>
           <Badge>{transaction.category}</Badge>
         </div>

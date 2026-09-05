@@ -10,7 +10,7 @@ import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
 import { useTransactions } from "../hooks/useTransactions";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
-import { formatCurrency, formatDateForDisplay } from "../utils/format";
+import { formatCurrency, formatDisplayDate } from "../utils/format";
 import { useToast } from "../context/ToastContext";
 import { TYPES } from "../data/types";
 
@@ -252,7 +252,7 @@ export default function TransactionDetail() {
           <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
               <FieldLabel>Date</FieldLabel>
-              {formatDateForDisplay(transaction.date)}
+              {formatDisplayDate(transaction.date)}
             </div>
             <div>
               <FieldLabel>Type</FieldLabel>

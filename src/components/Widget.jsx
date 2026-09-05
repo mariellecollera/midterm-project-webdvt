@@ -1,7 +1,4 @@
-export default function Widget({
-  title = "Personal Budget Tracker",
-  children,
-}) {
+export default function Widget({ title, children }) {
   return (
     <div
       className="rounded-2xl px-5 py-5 sm:px-8 sm:py-7"
@@ -12,7 +9,7 @@ export default function Widget({
         style={{ border: "1.5px solid var(--color-border)" }}
       >
         <span
-          className="font-display text-lg"
+          className="font-display text-md"
           style={{ color: "var(--color-text-primary)" }}
         >
           {title}

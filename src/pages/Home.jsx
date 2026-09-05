@@ -59,51 +59,19 @@ export default function Dashboard() {
 
   return (
     <Layout variant="panel">
-      <Widget>
+      <Widget title="Current Balance">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1
-              className="font-display text-xl font-bold"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              <span
-                className="mr-3 inline-block w-1 self-stretch align-middle"
-                style={{
-                  height: "1.1em",
-                  backgroundColor: "var(--color-btn-primary-bg)",
-                }}
-              />
-              Welcome, Mark S.
-            </h1>
-            <p
-              className="mt-2 pl-4 text-sm"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              Track your income. Refine your expenses.
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3">
-            <StatBox
-              label="Current Balance"
-              value={formatCurrency(balance)}
-              valueColor={
+          <div
+            className="flex flex-wrap items-center text-2xl font-bold gap-3"
+            style={{
+              fontFamily: "var(--font-display)",
+              color:
                 balance < 0
                   ? "var(--color-expense-text)"
-                  : "var(--color-text-primary)"
-              }
-            />
-            <span
-              className="h-8 w-1 self-center"
-              style={{
-                backgroundColor: "var(--color-btn-primary-bg)",
-              }}
-            />
-            <StatBox label="Total Income" value={formatCurrency(totalIncome)} />
-            <StatBox
-              label="Total Expenses"
-              value={formatCurrency(totalExpenses)}
-            />
+                  : "var(--color-text-primary)",
+            }}
+          >
+            {formatCurrency(balance)}
           </div>
         </div>
       </Widget>
@@ -144,7 +112,7 @@ export default function Dashboard() {
           No transactions match your filters yet.
         </p>
       ) : (
-        <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="mt-6 grid grid-cols-1 gap-4">
           {filteredTransactions.map((t) => (
             <TransactionCard key={t.id} transaction={t} />
           ))}

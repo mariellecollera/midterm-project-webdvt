@@ -1,8 +1,10 @@
 export const CATEGORIES = [
-  'Food',
-  'Utilities',
-  'Subscriptions',
-  'Transport',
-  'Shopping',
-  'Miscellaneous',
+  "Food",
+  "Bills",
+  "Grocery",
+  "Subscriptions",
+  "Transport",
+  "Shopping",
+  "Salary",
+  "Other",
 ];

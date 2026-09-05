@@ -105,6 +105,7 @@ export default function TransactionDetail() {
 
   function discardChanges() {
     setIsEditing(false);
+    setIsEditOpen(false);
     showToast("Changes discarded.");
   }
 
@@ -290,6 +291,7 @@ export default function TransactionDetail() {
             >
               "Tame thy tempers." – Kier Eagan
             </p>
+
             <Button
               variant="secondary"
               onClick={handleDelete}

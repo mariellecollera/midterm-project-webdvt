@@ -282,13 +282,7 @@ export default function TransactionDetail() {
             </div>
           </div>
 
-          <div className="mt-10 flex items-center justify-between">
-            <p
-              className="text-sm italic"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              "Tame thy tempers." – Kier Eagan
-            </p>
+          <div className="mt-10 flex items-center justify-end">
             <div className="flex gap-3">
               <Button variant="primary" onClick={() => setIsEditing(true)}>
                 Edit

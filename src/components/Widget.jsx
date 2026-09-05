@@ -17,12 +17,6 @@ export default function Widget({ title, children }) {
         >
           {title}
         </span>
-        <span
-          className="font-display text-sm font-bold tracking-widest"
-          style={{ color: "var(--color-text-primary)" }}
-        >
-          LUMON
-        </span>
       </div>
 
       <div className="mt-6">{children}</div>

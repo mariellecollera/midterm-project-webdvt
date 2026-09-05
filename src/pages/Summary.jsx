@@ -122,15 +122,8 @@ export default function Summary() {
       </div>
 
       <div className="mt-6">
-        <Widget title="Expenses Breakdown">
+        <Widget title="Expenses per Category">
           <div className="mt-8">
-            <h2
-              className="font-display text-lg"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              Expenses per Category
-            </h2>
-
             {byCategory.length === 0 ? (
               <p
                 className="mt-6 text-sm"

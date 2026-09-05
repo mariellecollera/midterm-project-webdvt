@@ -39,7 +39,7 @@ export default function Layout({
               to={tab.to}
               end={tab.end}
               className={({ isActive }) =>
-                `px-8 py-3 text-sm font-semibold font-display transition-colors rounded-t-xl ${
+                `rounded-t-xl px-5 py-2 text-xs font-semibold font-display transition-colors sm:px-8 sm:py-3 sm:text-sm ${
                   isActive ? "z-10" : ""
                 }`
               }
@@ -58,7 +58,7 @@ export default function Layout({
           ))}
           {extraTab && (
             <span
-              className="-mb-px rounded-t-xl px-8 py-3 font-display text-sm font-semibold"
+              className="-mb-px rounded-t-xl px-5 py-2 font-display text-xs font-semibold sm:px-8 sm:py-3 sm:text-sm"
               style={{
                 backgroundColor: "var(--color-tab-active-bg)",
                 color: "var(--color-tab-active-text)",
@@ -71,7 +71,7 @@ export default function Layout({
 
         <div
           ref={clickOutsideRef}
-          className="px-3 py-6 md:p-8"
+          className="px-4 py-6 md:p-8"
           style={{
             backgroundColor: "var(--color-tab-active-bg)",
             borderRadius: "0 2rem 0 0",
@@ -79,7 +79,7 @@ export default function Layout({
         >
           {variant === "panel" ? (
             <div
-              className="p-5 sm:p-8"
+              className="p-4 sm:p-8"
               style={{
                 backgroundColor: "var(--color-bg-card)",
                 boxShadow: "var(--shadow-card)",

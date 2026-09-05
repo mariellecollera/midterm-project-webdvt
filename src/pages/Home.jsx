@@ -89,7 +89,9 @@ export default function Dashboard() {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-3">
-        <SearchBar value={search} onChange={setSearch} />
+        <div className="w-full sm:w-auto sm:flex-1">
+          <SearchBar value={search} onChange={setSearch} />
+        </div>
         <Dropdown
           ariaLabel="Filter by type"
           value={typeFilter}

@@ -18,10 +18,7 @@ function TransactionCard({ transaction }) {
     <Link
       to={`/transaction/${transaction.id}`}
       className="flex items-center justify-between rounded-2xl px-5 py-4 transition-transform hover:-translate-y-0.5"
-      style={{
-        border: "1.5px solid var(--color-border)",
-        backgroundColor: "var(--color-transaction-card-bg)",
-      }}
+      style={{ border: "1.5px solid var(--color-border)" }}
     >
       <div className="min-w-0">
         <p
@@ -42,7 +39,7 @@ function TransactionCard({ transaction }) {
       </div>
 
       <div
-        className="ml-4 shrink-0 rounded-lg px-4 py-2 text-right font-bold"
+        className="ml-4 shrink-0 rounded-lg px-4 py-2 text-right text-sm sm:text-base font-bold"
         style={{
           backgroundColor: isExpense
             ? "var(--color-expense-bg)"

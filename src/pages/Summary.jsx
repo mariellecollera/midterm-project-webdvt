@@ -1,42 +1,129 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Layout from "../components/Layout";
 import Widget from "../components/Widget";
 import ThemeToggle from "../components/ThemeToggle";
-import { useTransactions } from "../hooks/useTransactions";
-import { formatCurrency } from "../utils/format";
+import TypeToggle from "../components/TypeToggle";
 import StatBox from "../components/StatBox";
+import { useTransactions } from "../hooks/useTransactions";
+import {
+  formatCurrency,
+  formatDisplayDate,
+  todayISO,
+  startOfWeek,
+  endOfWeek,
+  startOfMonth,
+  endOfMonth,
+  shiftDate,
+  isWithinRange,
+} from "../utils/format";
+import { FILTERS } from "../data/filters";
 
 export default function Summary() {
   const { transactions } = useTransactions();
+  const [filter, setFilter] = useState("Daily");
+  const [currentDate, setCurrentDate] = useState(todayISO());
+
+  const range = useMemo(() => {
+    if (filter === "Daily") return { start: currentDate, end: currentDate };
+    if (filter === "Weekly")
+      return { start: startOfWeek(currentDate), end: endOfWeek(currentDate) };
+    return { start: startOfMonth(currentDate), end: endOfMonth(currentDate) };
+  }, [filter, currentDate]);
+
+  const periodTransactions = useMemo(
+    () =>
+      transactions.filter((transaction) =>
+        isWithinRange(transaction.date, range.start, range.end),
+      ),
+    [transactions, range],
+  );
 
   const { totalExpenses, totalIncome, byCategory } = useMemo(() => {
     const totals = {};
-    let totalExpenses = 0;
-    let totalIncome = 0;
-    for (const t of transactions) {
-      const amt = Number(t.amount) || 0;
-      if (t.type === "Income") {
-        totalIncome += amt;
+    let total = 0;
+    let income = 0;
+    for (const transaction of periodTransactions) {
+      const amt = Number(transaction.amount) || 0;
+      if (transaction.type === "Income") {
+        income += amt;
         continue;
       }
-      if (t.type !== "Expense") continue;
-      totalExpenses += amt;
-      totals[t.category] = (totals[t.category] || 0) + amt;
+      if (transaction.type !== "Expense") continue;
+      total += amt;
+      totals[transaction.category] = (totals[transaction.category] || 0) + amt;
     }
     const rows = Object.entries(totals)
       .map(([category, amount]) => ({
         category,
         amount,
-        percent:
-          totalExpenses > 0 ? Math.round((amount / totalExpenses) * 100) : 0,
+        percent: total > 0 ? Math.round((amount / total) * 100) : 0,
       }))
       .sort((a, b) => b.amount - a.amount);
-    return { totalExpenses, totalIncome, byCategory: rows };
-  }, [transactions]);
+    return { totalExpenses: total, totalIncome: income, byCategory: rows };
+  }, [periodTransactions]);
+
+  const label = useMemo(() => {
+    if (filter === "Daily") return formatDisplayDate(currentDate);
+    if (filter === "Weekly")
+      return `${formatDisplayDate(range.start)} - ${formatDisplayDate(range.end)}`;
+    const date = new Date(`${currentDate}T00:00:00`);
+    return date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+    });
+  }, [filter, currentDate, range]);
+
+  function handleFilterChange(nextFilter) {
+    setFilter(nextFilter);
+    setCurrentDate(todayISO());
+  }
+
+  function goPrev() {
+    setCurrentDate((date) => shiftDate(date, filter, -1));
+  }
+
+  function goNext() {
+    setCurrentDate((date) => shiftDate(date, filter, 1));
+  }
 
   return (
     <Layout variant="panel">
-      <ThemeToggle />
+      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            onClick={goPrev}
+            aria-label="Previous period"
+            className="rounded-lg p-1.5 transition-opacity hover:opacity-70"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            <ChevronLeft size={20} />
+          </button>
+          <span
+            className="min-w-[10rem] text-center text-md font-semibold font-display"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            {label}
+          </span>
+          <button
+            type="button"
+            onClick={goNext}
+            aria-label="Next period"
+            className="rounded-lg p-1.5 transition-opacity hover:opacity-70"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            <ChevronRight size={20} />
+          </button>
+        </div>
+        <div className="w-full sm:w-64">
+          <TypeToggle
+            choices={FILTERS}
+            value={filter}
+            onChange={handleFilterChange}
+          />
+        </div>
+      </div>
 
       <div className="mt-6">
         <Widget title="Expenses per Category">
@@ -46,8 +133,7 @@ export default function Summary() {
                 className="mt-6 text-sm"
                 style={{ color: "var(--color-text-secondary)" }}
               >
-                No expenses logged yet — add a transaction to see your
-                breakdown.
+                No expenses in this period - try a different range.
               </p>
             ) : (
               <div className="mt-5 flex flex-col gap-4">
@@ -90,19 +176,18 @@ export default function Summary() {
                 ))}
               </div>
             )}
-          </div>
-
-          <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-            <StatBox
-              label="Total Expenses"
-              value={formatCurrency(totalExpenses)}
-              valueColor="var(--color-text-primary)"
-            ></StatBox>
-            <StatBox
-              label="Total Income"
-              value={formatCurrency(totalIncome)}
-              valueColor="var(--color-text-primary)"
-            ></StatBox>
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+              <StatBox
+                label="Total Expenses"
+                value={formatCurrency(totalExpenses)}
+                valueColor="var(--color-text-primary)"
+              />
+              <StatBox
+                label="Total Income"
+                value={formatCurrency(totalIncome)}
+                valueColor="var(--color-text-primary)"
+              />
+            </div>
           </div>
         </Widget>
       </div>

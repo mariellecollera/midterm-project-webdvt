@@ -1,22 +1,12 @@
 @import "tailwindcss";
 
-/* ==========================================================================
+/* ===============================================================
    LUMON Personal Budget Tracker — Global Design Tokens
-   Fonts: Michroma (display/logo), Microgamma D Extended (logo fallback --
-   commercial font, not bundled; add the .woff2 to src/assets/fonts and
-   uncomment the @font-face below if you own a license), Helvetica (body)
-   ========================================================================== */
-
-@font-face {
-  font-family: "Microgamma D Extended";
-  src: local("Microgamma D Extended"), local("Eurostile Extended");
-  font-weight: 700;
-  font-display: swap;
-}
+   Fonts: Michroma (display/logo), Helvetica (body)
+=============================================================== */
 
 :root {
-  --font-display:
-    "Michroma", "Microgamma D Extended", "Arial Narrow", sans-serif;
+  --font-display: "Michroma", "Arial Narrow", sans-serif;
   --font-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
   /* ---- Light theme (default) ---- */
@@ -57,8 +47,8 @@
   --category-grocery-text: #2f4a3d;
   --category-bills-bg: #e3e6ed;
   --category-bills-text: #0b1229;
-  --category-salary-bg: #f7ecd3;
-  --category-salary-text: #6b4f13;
+  --category-allowance-bg: #f7ecd3;
+  --category-allowance-text: #6b4f13;
   --category-food-bg: #f3e1e4;
   --category-food-text: #5b2333;
   --category-subscriptions-bg: #eaedf1;
@@ -96,8 +86,8 @@
   --color-tab-active-bg: #0e2247;
   --color-tab-active-text: #ffffff;
 
-  --color-btn-primary-bg: #8fadc9;
-  --color-btn-primary-text: #ffffff;
+  --color-btn-primary-bg: #0e2247;
+  --color-btn-primary-text: #8fadc9;
   --color-btn-secondary-bg: transparent;
   --color-btn-secondary-text: #c9d6ec;
   --color-btn-secondary-border: #8fadc9;
@@ -110,22 +100,25 @@
   --color-badge-bg: #1e2650;
   --color-badge-text: #c4cde8;
 
-  --category-grocery-bg: #1c2c26;
-  --category-grocery-text: #9fc2ae;
-  --category-bills-bg: #17203f;
-  --category-bills-text: #93a8d6;
-  --category-salary-bg: #3d2f10;
-  --category-salary-text: #e8c66b;
-  --category-food-bg: #3a1820;
-  --category-food-text: #e8a4b4;
-  --category-subscriptions-bg: #232c38;
-  --category-subscriptions-text: #a9b8c9;
-  --category-transport-bg: #262b2a;
-  --category-transport-text: #b9c4c1;
-  --category-other-bg: #16261f;
-  --category-other-text: #7fd0b8;
-  --category-shopping-bg: #33200f;
-  --category-shopping-text: #ed9a63;
+  --color-badge-bg: #212631;
+  --color-badge-text: #9fa8b8;
+
+  --category-grocery-bg: #1e2623;
+  --category-grocery-text: #8ba396;
+  --category-bills-bg: #20242e;
+  --category-bills-text: #8c98ad;
+  --category-allowance-bg: #27241d;
+  --category-allowance-text: #b0a183;
+  --category-food-bg: #281f21;
+  --category-food-text: #b08d93;
+  --category-subscriptions-bg: #22262e;
+  --category-subscriptions-text: #929ba8;
+  --category-transport-bg: #222526;
+  --category-transport-text: #969c9b;
+  --category-other-bg: #1c2624;
+  --category-other-text: #7fa197;
+  --category-shopping-bg: #27211d;
+  --category-shopping-text: #b09181;
 
   --color-modal-bg: #0a0e27;
 

@@ -159,9 +159,11 @@ export default function Summary() {
               label="Net Flow"
               value={formatCurrency(netFlow)}
               valueColor={
-                netFlow < 0
-                  ? "var(--color-expense-text)"
-                  : "var(--color-income-text)"
+                netFlow === 0
+                  ? "var(--color-display)"
+                  : netFlow < 0
+                    ? "var(--color-expense-text)"
+                    : "var(--color-income-text)"
               }
             />
           </div>

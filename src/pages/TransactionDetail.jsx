@@ -119,11 +119,7 @@ export default function TransactionDetail() {
   const isExpense = transaction.type === "Expense";
 
   return (
-    <Layout
-      variant="modal"
-      extraTab="View Transaction"
-      clickOutsideRef={editFormRef}
-    >
+    <Layout variant="modal" clickOutsideRef={editFormRef}>
       <Modal
         isOpen={isDeleteOpen}
         onClose={() => setIsDeleteOpen(false)}

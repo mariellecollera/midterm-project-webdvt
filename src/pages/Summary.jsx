@@ -100,7 +100,7 @@ export default function Summary() {
   }
 
   return (
-    <Layout variant="panel" extraTab="Summary">
+    <Layout variant="panel">
       <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
         <div className="flex items-center justify-center gap-2">
           <button

@@ -71,11 +71,7 @@ export default function AddTransaction() {
   useClickOutside(cardRef, handleDiscard, !isModalOpen);
 
   return (
-    <Layout
-      variant="modal"
-      extraTab="Add Transaction"
-      clickOutsideRef={cardRef}
-    >
+    <Layout variant="modal" clickOutsideRef={cardRef}>
       <Modal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}

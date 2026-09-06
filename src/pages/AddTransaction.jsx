@@ -84,11 +84,7 @@ export default function AddTransaction() {
         confirmLabel="Discard"
         cancelLabel="Keep Editing"
       />
-      <Button
-        variant="secondary"
-        onClick={() => navigate(-1)}
-        style={{ padding: 0, border: "none", marginBottom: "1rem" }}
-      >
+      <Button variant="secondary" onClick={() => navigate(-1)}>
         <ArrowLeft size={16} aria-hidden="true" />
         Back
       </Button>

@@ -229,11 +229,7 @@ export default function TransactionDetail() {
         </form>
       ) : (
         <>
-          <Button
-            variant="secondary"
-            onClick={() => navigate(-1)}
-            style={{ padding: 0, border: "none", marginBottom: "1rem" }}
-          >
+          <Button variant="secondary" onClick={() => navigate(-1)}>
             <ArrowLeft size={16} aria-hidden="true" />
             Back
           </Button>
@@ -280,7 +276,9 @@ export default function TransactionDetail() {
               <FieldLabel>Category</FieldLabel>
               <Badge
                 color={CATEGORY_COLORS[transaction.category]}
-                backgroundColor={CATEGORY_BADGE_BACKGROUNDS[transaction.category]}
+                backgroundColor={
+                  CATEGORY_BADGE_BACKGROUNDS[transaction.category]
+                }
               >
                 {transaction.category}
               </Badge>
@@ -296,14 +294,7 @@ export default function TransactionDetail() {
               <Button variant="primary" onClick={() => setIsEditing(true)}>
                 Edit
               </Button>
-              <Button
-                variant="secondary"
-                onClick={handleDelete}
-                style={{
-                  borderColor: "var(--color-expense-text)",
-                  color: "var(--color-expense-text)",
-                }}
-              >
+              <Button variant="delete" onClick={handleDelete}>
                 Delete
               </Button>
             </div>

@@ -60,7 +60,7 @@ export default function Dashboard() {
   return (
     <Layout variant="panel">
       <Widget title="Current Balance">
-        <div className="flex flex-wrap items-baseline sm:justify-between gap-2">
+        <div className="flex flex-wrap items-baseline justify-between gap-2">
           <div
             className="w-full sm:w-auto flex flex-wrap items-center text-2xl font-bold gap-3"
             style={{
@@ -74,7 +74,7 @@ export default function Dashboard() {
             {formatCurrency(balance)}
           </div>
           <Link to="/summary">
-            <Button variant="secondary" style={{ padding: 0, border: "none" }}>
+            <Button variant="secondary">
               View Summary
               <ArrowRight size={16} aria-hidden="true" />
             </Button>

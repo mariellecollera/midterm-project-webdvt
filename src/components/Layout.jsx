@@ -78,7 +78,7 @@ export default function Layout({
           className="px-4 py-6 md:p-8"
           style={{
             backgroundColor: "var(--color-tab-active-bg)",
-            borderRadius: "0 2rem 0 0",
+            borderRadius: "0 2rem 1rem 1rem",
           }}
         >
           {variant === "panel" ? (

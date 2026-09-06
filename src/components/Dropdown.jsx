@@ -7,7 +7,7 @@ export default function Dropdown({ value, onChange, options, ariaLabel }) {
         aria-label={ariaLabel}
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none rounded-full py-2.5 pl-4 pr-9 text-sm font-medium outline-none"
+        className="appearance-none rounded-full py-2.5 pl-4 pr-9 text-sm font-medium outline-none hover:opacity-70"
         style={{
           border: "1.5px solid var(--color-border)",
           color: "var(--color-text-primary)",

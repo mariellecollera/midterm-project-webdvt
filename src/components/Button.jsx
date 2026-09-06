@@ -35,7 +35,7 @@ export default function Button({
       type={type}
       onClick={onClick}
       disabled={disabled}
-      className={`${base} ${className} hover:opacity-90`}
+      className={`${base} ${className} hover:opacity-80`}
       style={{ ...variantStyle, ...styleOverride }}
       {...rest}
     >

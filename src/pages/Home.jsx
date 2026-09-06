@@ -85,7 +85,7 @@ export default function Dashboard() {
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="w-full sm:w-auto">
           <h2
-            className="font-display text-lg"
+            className="font-display text-lg font-bold"
             style={{ color: "var(--color-text-primary)" }}
           >
             Transactions

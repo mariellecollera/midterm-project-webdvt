@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
 import Layout from "../components/Layout";
 import Widget from "../components/Widget";
 import ThemeToggle from "../components/ThemeToggle";
@@ -18,6 +19,7 @@ import {
   isWithinRange,
 } from "../utils/format";
 import { FILTERS } from "../data/filters";
+import { CATEGORY_COLORS } from "../data/categories";
 
 export default function Summary() {
   const { transactions } = useTransactions();
@@ -39,31 +41,39 @@ export default function Summary() {
     [transactions, range],
   );
 
-  const { totalExpenses, totalIncome, byCategory } = useMemo(() => {
-    const totals = {};
-    let total = 0;
-    let income = 0;
-    for (const transaction of periodTransactions) {
-      const amt = Number(transaction.amount) || 0;
-      if (transaction.type === "Income") {
-        income += amt;
-        continue;
+  const { totalExpenses, totalIncome, totalTransactions, byCategory } =
+    useMemo(() => {
+      const totals = {};
+      let total = 0;
+      let income = 0;
+      for (const transaction of periodTransactions) {
+        const amt = Number(transaction.amount) || 0;
+        if (transaction.type === "Income") {
+          income += amt;
+          continue;
+        }
+        if (transaction.type !== "Expense") continue;
+        total += amt;
+        totals[transaction.category] =
+          (totals[transaction.category] || 0) + amt;
       }
-      if (transaction.type !== "Expense") continue;
-      total += amt;
-      totals[transaction.category] = (totals[transaction.category] || 0) + amt;
-    }
-    const rows = Object.entries(totals)
-      .map(([category, amount]) => ({
-        category,
-        amount,
-        percent: total > 0 ? Math.round((amount / total) * 100) : 0,
-      }))
-      .sort((a, b) => b.amount - a.amount);
-    return { totalExpenses: total, totalIncome: income, byCategory: rows };
-  }, [periodTransactions]);
+      const rows = Object.entries(totals)
+        .map(([category, amount]) => ({
+          category,
+          amount,
+          color: CATEGORY_COLORS[category] || "var(--color-btn-primary-bg)",
+          percent: total > 0 ? Math.round((amount / total) * 100) : 0,
+        }))
+        .sort((a, b) => b.amount - a.amount);
+      return {
+        totalExpenses: total,
+        totalIncome: income,
+        totalTransactions: periodTransactions.length,
+        byCategory: rows,
+      };
+    }, [periodTransactions]);
 
-  const topCategories = byCategory.slice(0, 3);
+  const netFlow = totalIncome - totalExpenses;
 
   const label = useMemo(() => {
     if (filter === "Daily") return formatDisplayDate(currentDate);
@@ -130,79 +140,125 @@ export default function Summary() {
           <ThemeToggle />
         </div>
       </div>
+
       <div className="mt-6">
         <Widget title="Budget Summary">
-          <div className="mt-4 text-center"></div>
+          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+            <StatBox
+              label="Total Expenses"
+              value={formatCurrency(totalExpenses)}
+              valueColor="var(--color-display)"
+            />
+            <StatBox
+              label="Total Income"
+              value={formatCurrency(totalIncome)}
+              valueColor="var(--color-display)"
+            />
+            <StatBox label="Total Transactions" value={totalTransactions} />
+            <StatBox
+              label="Net Flow"
+              value={formatCurrency(netFlow)}
+              valueColor={
+                netFlow < 0
+                  ? "var(--color-expense-text)"
+                  : "var(--color-income-text)"
+              }
+            />
+          </div>
         </Widget>
       </div>
 
       <div className="mt-6">
-        <Widget title="Category Breakdown">
-          <div className="mt-4 text-center">
-            {byCategory.length === 0 ? (
-              <p
-                className="mt-6 text-sm"
-                style={{ color: "var(--color-text-secondary)" }}
+        <Widget title="Expenses by Category">
+          {byCategory.length === 0 ? (
+            <p
+              className="mt-6 text-sm text-center"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              No transactions logged in this period.
+            </p>
+          ) : (
+            <div className="mt-4 flex flex-col items-center gap-6 sm:flex-row sm:items-center sm:gap-8">
+              <div
+                className="relative h-64 w-full max-w-[20rem] sm:h-72 sm:flex-1"
+                aria-label="Donut chart showing expenses by category"
               >
-                No transactions logged in this period.
-              </p>
-            ) : (
-              <div className="mt-4 flex flex-col gap-4">
-                <h3 className="text-left text-sm font-display">
-                  Top Categories
-                </h3>
-                <div className="flex gap-3">
-                  {topCategories.map((row) => (
-                    <div key={row.category} className="min-w-0 flex-1">
-                      <StatBox
-                        label={row.category}
-                        value={row.percent + "%"}
-                        valueColor="var(--color-text-primary)"
-                      ></StatBox>
-                    </div>
-                  ))}
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={byCategory}
+                      dataKey="amount"
+                      nameKey="category"
+                      innerRadius="62%"
+                      outerRadius="88%"
+                      paddingAngle={1}
+                      stroke="var(--color-bg-card)"
+                      strokeWidth={2}
+                    >
+                      {byCategory.map((row) => (
+                        <Cell key={row.category} fill={row.color} />
+                      ))}
+                    </Pie>
+                    <Tooltip
+                      formatter={(value, name) => [formatCurrency(value), name]}
+                      wrapperStyle={{ zIndex: 50 }}
+                      contentStyle={{
+                        backgroundColor: "var(--color-bg-card)",
+                        border: "1.5px solid var(--color-border)",
+                        borderRadius: "0.5rem",
+                        color: "var(--color-text-primary)",
+                      }}
+                    />
+                  </PieChart>
+                </ResponsiveContainer>
+                <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">
+                  <span
+                    className="font-display text-3xl font-bold"
+                    style={{ color: "var(--color-text-primary)" }}
+                  >
+                    {byCategory[0].percent}%
+                  </span>
+                  <span
+                    className="text-sm"
+                    style={{ color: "var(--color-text-secondary)" }}
+                  >
+                    {byCategory[0].category}
+                  </span>
                 </div>
-                <h3 className="text-left text-sm font-display">
-                  Expenses by Category
-                </h3>
+              </div>
+
+              <div className="w-full space-y-3 sm:flex-1">
                 {byCategory.map((row) => (
-                  <div key={row.category} className=" text-left">
-                    <div className="flex items-center justify-between gap-4">
+                  <div
+                    key={row.category}
+                    className="flex items-center justify-between gap-4 text-left"
+                  >
+                    <div className="flex min-w-0 items-center gap-3">
                       <span
-                        className="text-sm font-semibold"
-                        style={{ color: "var(--color-text-primary)" }}
+                        className="h-3 w-3 shrink-0 rounded-full"
+                        style={{
+                          backgroundColor: row.color,
+                        }}
+                        aria-hidden="true"
+                      />
+                      <span
+                        className="truncate text-sm font-semibold"
+                        style={{ color: "var(--color-text-secondary)" }}
                       >
                         {row.category}
                       </span>
-                      <span
-                        className="text-sm font-bold"
-                        style={{ color: "var(--color-text-primary)" }}
-                      >
-                        {formatCurrency(row.amount)}
-                      </span>
                     </div>
-                    <div
-                      className="mt-2 h-5 overflow-hidden "
-                      style={{ backgroundColor: "var(--color-badge-bg)" }}
-                      role="progressbar"
-                      aria-valuenow={row.percent}
-                      aria-valuemin={0}
-                      aria-valuemax={100}
-                      aria-label={`${row.category} share of expenses`}
+                    <span
+                      className="shrink-0 text-sm font-bold"
+                      style={{ color: "var(--color-text-primary)" }}
                     >
-                      <div
-                        className="h-full  transition-[width] duration-300"
-                        style={{
-                          width: `${row.percent}%`,
-                          backgroundColor: "var(--color-btn-primary-bg)",
-                        }}
-                      />
-                    </div>
+                      {formatCurrency(row.amount)}
+                    </span>
                   </div>
                 ))}
               </div>
-            )}
-          </div>
+            </div>
+          )}
         </Widget>
       </div>
     </Layout>

@@ -51,7 +51,7 @@ export function TextInput({
             type="button"
             onClick={() => inputRef.current?.showPicker()}
             aria-label="Open calendar"
-            className="absolute left-3 top-1/2 -translate-y-1/2 rounded p-1 transition-opacity hover:opacity-70"
+            className="absolute left-3 top-1/2 z-10 -translate-y-1/2 rounded p-1 transition-opacity hover:opacity-70"
           >
             <Calendar
               size={18}

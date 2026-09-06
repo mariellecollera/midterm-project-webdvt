@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import Widget from "../components/Widget";
+import TextLink from "../components/TextLink";
 import { formatCurrency } from "../utils/format";
 import SearchBar from "../components/SearchBar";
 import Dropdown from "../components/Dropdown";
@@ -73,12 +74,11 @@ export default function Dashboard() {
           >
             {formatCurrency(balance)}
           </div>
-          <Link to="/summary">
-            <Button variant="secondary">
-              View Summary
-              <ArrowRight size={16} aria-hidden="true" />
-            </Button>
-          </Link>
+
+          <TextLink to="/summary" className="mb-4">
+            View Summary
+            <ArrowRight size={16} aria-hidden="true" />
+          </TextLink>
         </div>
       </Widget>
 

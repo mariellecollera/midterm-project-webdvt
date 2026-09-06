@@ -13,10 +13,6 @@ const VARIANT_STYLES = {
     color: "var(--color-expense-text)",
     border: "1.5px solid var(--color-expense-text)",
   },
-  navigation: {
-    color: "var(--color-btn-navigation-text)",
-    borderBottom: "1.5px dashed var(--color-btn-secondary-border)",
-  },
 };
 
 export default function Button({

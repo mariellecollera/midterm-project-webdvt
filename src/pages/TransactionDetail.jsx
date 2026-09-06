@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import Layout from "../components/Layout";
+import TextLink from "../components/TextLink";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import Badge from "../components/Badge";
@@ -229,10 +230,10 @@ export default function TransactionDetail() {
         </form>
       ) : (
         <>
-          <Button variant="secondary" onClick={() => navigate(-1)}>
+          <TextLink onClick={() => navigate(-1)} className="mb-4">
             <ArrowLeft size={16} aria-hidden="true" />
             Back
-          </Button>
+          </TextLink>
           <div className="flex items-center justify-between">
             <h1
               className="font-display text-xl font-bold"

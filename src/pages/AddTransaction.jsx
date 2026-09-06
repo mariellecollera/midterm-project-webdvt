@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
+import TextLink from "../components/TextLink";
 import Modal from "../components/Modal";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
@@ -84,10 +85,10 @@ export default function AddTransaction() {
         confirmLabel="Discard"
         cancelLabel="Keep Editing"
       />
-      <Button variant="secondary" onClick={() => navigate(-1)}>
+      <TextLink onClick={() => navigate(-1)} className="mb-4">
         <ArrowLeft size={16} aria-hidden="true" />
         Back
-      </Button>
+      </TextLink>
       <form onSubmit={handleSubmit} noValidate>
         <h1
           className="font-display text-xl font-bold"

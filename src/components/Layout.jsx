@@ -42,7 +42,7 @@ export default function Layout({
                 to={tab.to}
                 end={tab.end}
                 className={({ isActive }) =>
-                  `rounded-t-xl px-5 py-2 text-xs font-semibold font-display transition-colors sm:px-8 sm:py-3 sm:text-sm ${
+                  `rounded-t-xl px-5 py-2 text-xs font-semibold font-display transition-colors duration-300 ease-in-out sm:px-8 sm:py-3 sm:text-sm ${
                     isActive ? "z-10" : ""
                   }`
                 }

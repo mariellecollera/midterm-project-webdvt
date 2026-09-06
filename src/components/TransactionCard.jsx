@@ -2,6 +2,10 @@ import { memo } from "react";
 import { Link } from "react-router-dom";
 import Badge from "./Badge";
 import { formatCurrency, formatDisplayDate } from "../utils/format";
+import {
+  CATEGORY_BADGE_BACKGROUNDS,
+  CATEGORY_COLORS,
+} from "../data/categories";
 
 /**
  * Performance note: Dashboard re-renders on every keystroke in the search
@@ -18,7 +22,10 @@ function TransactionCard({ transaction }) {
     <Link
       to={`/transaction/${transaction.id}`}
       className="flex items-center justify-between rounded-2xl px-5 py-4 transition-transform hover:-translate-y-0.5"
-      style={{ border: "1.5px solid var(--color-border)" }}
+      style={{
+        border: "1.5px solid var(--color-border)",
+        backgroundColor: "var(--color-transaction-card-bg)",
+      }}
     >
       <div className="min-w-0">
         <p
@@ -34,7 +41,12 @@ function TransactionCard({ transaction }) {
           >
             {formatDisplayDate(transaction.date)}
           </span>
-          <Badge>{transaction.category}</Badge>
+          <Badge
+            color={CATEGORY_COLORS[transaction.category]}
+            backgroundColor={CATEGORY_BADGE_BACKGROUNDS[transaction.category]}
+          >
+            {transaction.category}
+          </Badge>
         </div>
       </div>
 

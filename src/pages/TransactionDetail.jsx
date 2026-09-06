@@ -5,6 +5,10 @@ import Layout from "../components/Layout";
 import Button from "../components/Button";
 import Modal from "../components/Modal";
 import Badge from "../components/Badge";
+import {
+  CATEGORY_BADGE_BACKGROUNDS,
+  CATEGORY_COLORS,
+} from "../data/categories";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
 import { useTransactions } from "../hooks/useTransactions";
@@ -274,7 +278,12 @@ export default function TransactionDetail() {
 
             <div>
               <FieldLabel>Category</FieldLabel>
-              <Badge>{transaction.category}</Badge>
+              <Badge
+                color={CATEGORY_COLORS[transaction.category]}
+                backgroundColor={CATEGORY_BADGE_BACKGROUNDS[transaction.category]}
+              >
+                {transaction.category}
+              </Badge>
             </div>
             <div>
               <FieldLabel>Amount</FieldLabel>

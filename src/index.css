@@ -53,6 +53,23 @@
   --color-badge-bg: #eef0f4;
   --color-badge-text: #33415c;
 
+  --category-grocery-bg: #e4ede8;
+  --category-grocery-text: #2f4a3d;
+  --category-bills-bg: #e3e6ed;
+  --category-bills-text: #0b1229;
+  --category-salary-bg: #f7ecd3;
+  --category-salary-text: #6b4f13;
+  --category-food-bg: #f3e1e4;
+  --category-food-text: #5b2333;
+  --category-subscriptions-bg: #eaedf1;
+  --category-subscriptions-text: #3e4c5e;
+  --category-transport-bg: #e7eae9;
+  --category-transport-text: #2e3634;
+  --category-other-bg: #e1eeea;
+  --category-other-text: #1f4a44;
+  --category-shopping-bg: #f5e4d6;
+  --category-shopping-text: #7a3b1d;
+
   --color-modal-bg: #eaf4f1;
 
   --shadow-card: 0 1px 2px rgba(15, 42, 87, 0.06);
@@ -74,9 +91,9 @@
   --color-border: #3c4a7a;
   --color-border-soft: #2a3562;
 
-  --color-tab-inactive-bg: #2a3562;
-  --color-tab-inactive-text: #c9d6ec;
-  --color-tab-active-bg: #8fadc9;
+  --color-tab-inactive-bg: #8fadc9;
+  --color-tab-inactive-text: #2a3562;
+  --color-tab-active-bg: #0e2247;
   --color-tab-active-text: #ffffff;
 
   --color-btn-primary-bg: #8fadc9;
@@ -92,6 +109,23 @@
 
   --color-badge-bg: #1e2650;
   --color-badge-text: #c4cde8;
+
+  --category-grocery-bg: #1c2c26;
+  --category-grocery-text: #9fc2ae;
+  --category-bills-bg: #17203f;
+  --category-bills-text: #93a8d6;
+  --category-salary-bg: #3d2f10;
+  --category-salary-text: #e8c66b;
+  --category-food-bg: #3a1820;
+  --category-food-text: #e8a4b4;
+  --category-subscriptions-bg: #232c38;
+  --category-subscriptions-text: #a9b8c9;
+  --category-transport-bg: #262b2a;
+  --category-transport-text: #b9c4c1;
+  --category-other-bg: #16261f;
+  --category-other-text: #7fd0b8;
+  --category-shopping-bg: #33200f;
+  --category-shopping-text: #ed9a63;
 
   --color-modal-bg: #0a0e27;
 

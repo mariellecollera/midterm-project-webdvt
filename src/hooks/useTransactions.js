@@ -1,22 +1,15 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
-const STORAGE_KEY = 'lumon-transactions';
-
-const SEED_DATA = [
-  { id: crypto.randomUUID(), description: 'Grocery Run', date: '2026-08-26', type: 'Expense', category: 'Food', amount: 670.75 },
-  { id: crypto.randomUUID(), description: 'eGov Prize', date: '2026-08-26', type: 'Income', category: 'Miscellaneous', amount: 20000 },
-  { id: crypto.randomUUID(), description: 'Electric Bill', date: '2026-08-20', type: 'Expense', category: 'Utilities', amount: 800 },
-  { id: crypto.randomUUID(), description: 'Streaming Bundle', date: '2026-08-18', type: 'Expense', category: 'Subscriptions', amount: 502.25 },
-];
+const STORAGE_KEY = "lumon-transactions";
 
 function readFromStorage() {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
-    if (!raw) return SEED_DATA;
+    if (!raw) return [];
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) ? parsed : SEED_DATA;
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
-    return SEED_DATA;
+    return [];
   }
 }
 
@@ -59,7 +52,7 @@ export function useTransactions() {
 
   const updateTransaction = useCallback((id, data) => {
     setTransactions((prev) =>
-      prev.map((t) => (t.id === id ? { ...t, ...data, id } : t))
+      prev.map((t) => (t.id === id ? { ...t, ...data, id } : t)),
     );
   }, []);
 
@@ -69,8 +62,14 @@ export function useTransactions() {
 
   const getTransaction = useCallback(
     (id) => transactions.find((t) => t.id === id),
-    [transactions]
+    [transactions],
   );
 
-  return { transactions, addTransaction, updateTransaction, deleteTransaction, getTransaction };
+  return {
+    transactions,
+    addTransaction,
+    updateTransaction,
+    deleteTransaction,
+    getTransaction,
+  };
 }

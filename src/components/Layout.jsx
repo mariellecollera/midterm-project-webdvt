@@ -1,9 +1,7 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import lumon_logo from "../assets/lumon_logo.svg";
 
-const TABS = [
-  { to: "/", label: "Home", end: true },
-  { to: "/summary", label: "Summary" },
-];
+const TABS = [{ to: "/", label: "Home", end: true }];
 
 /**
  * Layout wraps every page: LUMON wordmark + pill tab navigation.
@@ -23,39 +21,45 @@ export default function Layout({
       style={{ backgroundColor: "var(--color-bg-app)" }}
     >
       <div className="mx-auto max-w-5xl px-2 py-6 sm:px-6">
-        <div className="mb-1 pl-1">
-          <span
-            className="font-display text-sm tracking-wide"
-            style={{ color: "var(--color-text-primary)" }}
-          >
-            Microdata Refinement
-          </span>
-        </div>
-
+        <img src={lumon_logo} className="w-12 h-9 sm:w-16 sm:h-12" />
         <nav className="flex" aria-label="Primary">
-          {TABS.map((tab) => (
-            <NavLink
-              key={tab.to}
-              to={tab.to}
-              end={tab.end}
-              className={({ isActive }) =>
-                `rounded-t-xl px-5 py-2 text-xs font-semibold font-display transition-colors sm:px-8 sm:py-3 sm:text-sm ${
-                  isActive ? "z-10" : ""
-                }`
-              }
-              style={({ isActive }) => ({
-                backgroundColor: isActive
-                  ? "var(--color-tab-active-bg)"
-                  : "var(--color-tab-inactive-bg)",
-                color: isActive
-                  ? "var(--color-tab-active-text)"
-                  : "var(--color-tab-inactive-text)",
-                boxShadow: isActive ? "none" : "var(--shadow-tab)",
-              })}
-            >
-              {tab.label}
-            </NavLink>
-          ))}
+          {TABS.map((tab) =>
+            tab.isLogo ? (
+              <Link
+                key={tab.label}
+                to={tab.to}
+                aria-label="Go to home"
+                title="Go to home"
+                className="flex h-9 w-12 shrink-0 items-center justify-center rounded-t-xl border border-b-0 border-dashed transition-opacity hover:opacity-70 sm:h-12 sm:w-16"
+                style={{
+                  borderColor: "var(--color-border-soft)",
+                  color: "var(--color-text-muted)",
+                }}
+              />
+            ) : (
+              <NavLink
+                key={tab.to}
+                to={tab.to}
+                end={tab.end}
+                className={({ isActive }) =>
+                  `rounded-t-xl px-5 py-2 text-xs font-semibold font-display transition-colors sm:px-8 sm:py-3 sm:text-sm ${
+                    isActive ? "z-10" : ""
+                  }`
+                }
+                style={({ isActive }) => ({
+                  backgroundColor: isActive
+                    ? "var(--color-tab-active-bg)"
+                    : "var(--color-tab-inactive-bg)",
+                  color: isActive
+                    ? "var(--color-tab-active-text)"
+                    : "var(--color-tab-inactive-text)",
+                  boxShadow: isActive ? "none" : "var(--shadow-tab)",
+                })}
+              >
+                {tab.label}
+              </NavLink>
+            ),
+          )}
           {extraTab && (
             <span
               className="-mb-px rounded-t-xl px-5 py-2 font-display text-xs font-semibold sm:px-8 sm:py-3 sm:text-sm"

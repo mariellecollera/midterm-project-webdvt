@@ -5,7 +5,7 @@ export const CATEGORIES = [
   "Subscriptions",
   "Transport",
   "Shopping",
-  "Salary",
+  "Allowance",
   "Other",
 ];
 
@@ -16,7 +16,7 @@ export const CATEGORY_COLORS = {
   Subscriptions: "var(--category-subscriptions-text)",
   Transport: "var(--category-transport-text)",
   Shopping: "var(--category-shopping-text)",
-  Salary: "var(--category-salary-text)",
+  Allowance: "var(--category-allowance-text)",
   Other: "var(--category-other-text)",
 };
 
@@ -27,6 +27,6 @@ export const CATEGORY_BADGE_BACKGROUNDS = {
   Subscriptions: "var(--category-subscriptions-bg)",
   Transport: "var(--category-transport-bg)",
   Shopping: "var(--category-shopping-bg)",
-  Salary: "var(--category-salary-bg)",
+  Allowance: "var(--category-allowance-bg)",
   Other: "var(--category-other-bg)",
 };

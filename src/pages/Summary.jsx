@@ -105,7 +105,7 @@ export default function Summary() {
 
   return (
     <Layout variant="panel">
-      <div className="flex flex-col gap-4 sm:flex-row sm:justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row   sm:justify-between">
         <div className="flex items-center justify-center gap-2">
           <button
             type="button"
@@ -180,7 +180,7 @@ export default function Summary() {
             </p>
           </div>
 
-          <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <div className="mt-4 grid grid-cols-2 gap-3  md:grid-cols-4">
             <StatBox
               label="Total Expenses"
               value={formatCurrency(totalExpenses)}

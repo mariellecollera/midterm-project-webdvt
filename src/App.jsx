@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import AddTransaction from "./pages/AddTransaction";
 import TransactionDetail from "./pages/TransactionDetail";
 import Summary from "./pages/Summary";
+import EditBudget from "./pages/EditBudget";
 
 export default function App() {
   return (
@@ -18,6 +19,7 @@ export default function App() {
           <Route path="/summary" element={<Summary />} />
           <Route path="/add" element={<AddTransaction />} />
           <Route path="/transaction/:id" element={<TransactionDetail />} />
+          <Route path="/edit-budget" element={<EditBudget />} />
         </Routes>
       </div>
     </div>

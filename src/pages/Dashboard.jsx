@@ -24,7 +24,7 @@ const CATEGORY_OPTIONS = [
 ];
 
 export default function Dashboard() {
-  const { transactions } = useTransactions();
+  const { transactions, budget } = useTransactions();
   const [search, setSearch] = useState("");
   const [typeFilter, setTypeFilter] = useState("All");
   const [categoryFilter, setCategoryFilter] = useState("All");
@@ -60,27 +60,52 @@ export default function Dashboard() {
 
   return (
     <Layout variant="panel">
-      <Widget title="Current Balance">
-        <div className="flex flex-wrap items-baseline justify-between gap-2">
-          <div
-            className="w-full sm:w-auto flex flex-wrap items-center text-2xl font-bold gap-3"
-            style={{
-              fontFamily: "var(--font-display)",
-              color:
-                balance < 0
-                  ? "var(--color-expense-text)"
-                  : "var(--color-text-primary)",
-            }}
-          >
-            {formatCurrency(balance)}
-          </div>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-stretch">
+        <Widget title="Current Balance">
+          <div className="flex flex-wrap text-2xl items-baseline justify-between gap-2">
+            <div
+              className="flex flex-wrap items-center font-bold gap-3"
+              style={{
+                fontFamily: "var(--font-display)",
+                color:
+                  balance < 0
+                    ? "var(--color-expense-text)"
+                    : "var(--color-text-primary)",
+              }}
+            >
+              {formatCurrency(balance)}
+            </div>
 
-          <TextLink to="/summary">
-            View Summary
-            <ArrowRight size={16} aria-hidden="true" />
-          </TextLink>
-        </div>
-      </Widget>
+            <TextLink to="/summary">
+              View Summary
+              <ArrowRight size={16} aria-hidden="true" />
+            </TextLink>
+          </div>
+        </Widget>
+
+        <Widget title="Remaining Budget">
+          <div className="flex flex-wrap text-2xl items-baseline justify-between gap-2">
+            <div>
+              <div
+                className="flex flex-wrap items-center font-bold gap-3"
+                style={{
+                  fontFamily: "var(--font-display)",
+                  color: "var(--color-text-primary)",
+                }}
+              >
+                {formatCurrency(budget - totalExpenses)}
+              </div>
+              <div className="text-sm mt-1">
+                out of {formatCurrency(budget)}
+              </div>
+            </div>
+
+            <Link to="/edit-budget">
+              <Button variant="primary">Edit Budget</Button>
+            </Link>
+          </div>
+        </Widget>
+      </div>
 
       <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="w-full sm:w-auto">

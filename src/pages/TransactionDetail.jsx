@@ -148,7 +148,7 @@ export default function TransactionDetail() {
           </div>
 
           <div className="mt-6">
-            <FieldLabel>Description</FieldLabel>
+            <FieldLabel htmlFor="description">Description</FieldLabel>
             <TextInput
               id="description"
               value={form.description}
@@ -159,7 +159,7 @@ export default function TransactionDetail() {
 
           <div className="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2">
             <div>
-              <FieldLabel>Date</FieldLabel>
+              <FieldLabel htmlFor="date">Date</FieldLabel>
               <TextInput
                 id="date"
                 type="date"
@@ -169,8 +169,8 @@ export default function TransactionDetail() {
               />
             </div>
             <div>
-              <FieldLabel>Type</FieldLabel>
               <TypeToggle
+                label="Type"
                 choices={TYPES}
                 value={form.type}
                 onChange={(v) => setField("type", v)}
@@ -178,7 +178,7 @@ export default function TransactionDetail() {
             </div>
 
             <div>
-              <FieldLabel>Category</FieldLabel>
+              <FieldLabel htmlFor="category">Category</FieldLabel>
               <SelectInput
                 id="category"
                 value={form.category}
@@ -188,7 +188,7 @@ export default function TransactionDetail() {
               />
             </div>
             <div>
-              <FieldLabel>Amount</FieldLabel>
+              <FieldLabel htmlFor="amount">Amount</FieldLabel>
               <TextInput
                 id="amount"
                 type="number"

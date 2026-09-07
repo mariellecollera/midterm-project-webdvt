@@ -1,9 +1,11 @@
 import { ChevronDown } from "lucide-react";
 
-export default function Dropdown({ value, onChange, options, ariaLabel }) {
+export default function Dropdown({ id, value, onChange, options, ariaLabel }) {
   return (
     <div className="relative">
       <select
+        id={id}
+        name={id}
         aria-label={ariaLabel}
         value={value}
         onChange={(e) => onChange(e.target.value)}

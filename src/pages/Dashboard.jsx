@@ -75,7 +75,7 @@ export default function Dashboard() {
             {formatCurrency(balance)}
           </div>
 
-          <TextLink to="/summary" className="mb-4">
+          <TextLink to="/summary">
             View Summary
             <ArrowRight size={16} aria-hidden="true" />
           </TextLink>
@@ -98,15 +98,21 @@ export default function Dashboard() {
 
       <div className="mt-4 flex flex-wrap gap-3">
         <div className="w-full sm:w-auto sm:flex-1">
-          <SearchBar value={search} onChange={setSearch} />
+          <SearchBar
+            id="search-transactions"
+            value={search}
+            onChange={setSearch}
+          />
         </div>
         <Dropdown
+          id="filter-type"
           ariaLabel="Filter by type"
           value={typeFilter}
           onChange={setTypeFilter}
           options={TYPE_OPTIONS}
         />
         <Dropdown
+          id="filter-category"
           ariaLabel="Filter by category"
           value={categoryFilter}
           onChange={setCategoryFilter}

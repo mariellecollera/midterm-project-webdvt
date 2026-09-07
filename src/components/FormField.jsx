@@ -1,9 +1,10 @@
 import { useRef } from "react";
 import { Calendar, ChevronDown } from "lucide-react";
 
-export function FieldLabel({ children }) {
+export function FieldLabel({ children, htmlFor }) {
   return (
     <label
+      htmlFor={htmlFor}
       className="mb-2 block text-sm font-bold font-display"
       style={{ color: "var(--color-text-primary)" }}
     >

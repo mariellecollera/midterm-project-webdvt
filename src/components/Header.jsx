@@ -1,10 +1,13 @@
 import { NavLink, useLocation } from "react-router-dom";
 import lumon_logo from "../assets/lumon_logo.svg";
 
-const TABS = [{ to: "/", label: "Dashboard", end: true }];
+const TABS = [
+  { to: "/", label: "Dashboard", end: true },
+  { to: "/summary", label: "Summary" },
+];
 
 function getExtraTab(pathname) {
-  if (pathname === "/summary") return "Summary";
+  if (pathname === "/edit-budget") return "Edit Budget";
   if (pathname === "/add") return "Add Transaction";
   if (pathname.startsWith("/transaction/")) return "View Transaction";
   return null;
@@ -24,7 +27,7 @@ export default function Header() {
             to={tab.to}
             end={tab.end}
             className={({ isActive }) =>
-              `rounded-t-xl px-5 py-2 text-xs font-semibold font-display transition-colors duration-300 ease-in-out sm:px-8 sm:py-3 sm:text-sm ${
+              `rounded-t-xl px-6 py-3 text-xs font-semibold font-display transition-colors duration-300 ease-in-out sm:px-8 sm:py-3 sm:text-sm ${
                 isActive ? "z-10" : ""
               }`
             }

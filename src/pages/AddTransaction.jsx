@@ -11,7 +11,7 @@ import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";
 import { useToast } from "../context/ToastContext";
-import { TYPES } from "../data/types";
+import { TYPES } from "../data/typetoggle";
 import { ArrowLeft } from "lucide-react";
 
 const EMPTY_FORM = {

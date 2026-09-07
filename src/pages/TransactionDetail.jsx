@@ -17,7 +17,7 @@ import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { formatCurrency, formatDisplayDate } from "../utils/format";
 import { useToast } from "../context/ToastContext";
-import { TYPES } from "../data/types";
+import { TYPES } from "../data/typetoggle";
 
 export default function TransactionDetail() {
   const { id } = useParams();

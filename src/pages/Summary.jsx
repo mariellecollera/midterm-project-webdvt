@@ -19,7 +19,7 @@ import {
   shiftDate,
   isWithinRange,
 } from "../utils/format";
-import { FILTERS } from "../data/filters";
+import { FILTERS } from "../data/typetoggle";
 import { CATEGORY_COLORS } from "../data/categories";
 
 export default function Summary() {

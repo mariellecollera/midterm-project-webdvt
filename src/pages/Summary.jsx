@@ -132,7 +132,7 @@ export default function Summary() {
             <ChevronRight size={20} />
           </button>
         </div>
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
           <div className="w-full sm:w-64">
             <TypeToggle
               choices={FILTERS}
@@ -140,8 +140,9 @@ export default function Summary() {
               onChange={handleFilterChange}
             />
           </div>
-
-          <ThemeToggle />
+          <div className="self-end sm:self-auto">
+            <ThemeToggle />
+          </div>
         </div>
       </div>
 
@@ -149,7 +150,7 @@ export default function Summary() {
         <Widget title="Budget Summary">
           <div className="mt-6">
             <div
-              className="flex items-center justify-between text-sm"
+              className="flex items-center justify-between"
               style={{ color: "var(--color-text-primary)" }}
             >
               <span>Budget Used</span>
@@ -158,7 +159,7 @@ export default function Summary() {
               </span>
             </div>
             <div
-              className="mt-2 h-3 w-full overflow-hidden"
+              className="mt-2 h-4 w-full overflow-hidden"
               style={{ backgroundColor: "var(--color-bg-input)" }}
             >
               <div

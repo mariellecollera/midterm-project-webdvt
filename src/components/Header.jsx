@@ -40,7 +40,7 @@ export default function Header() {
                 end={tab.end}
                 aria-label={tab.label}
                 className={({ isActive }) =>
-                  `flex items-center justify-center gap-2 rounded-t-xl px-4 py-3 text-xs font-semibold font-display transition-colors duration-300 ease-in-out sm:px-8 sm:py-3 sm:text-sm ${
+                  `flex items-center justify-center gap-2 rounded-t-xl px-8 py-3 text-xs font-semibold font-display transition-colors duration-300 ease-in-out sm:text-sm ${
                     isActive ? "z-10" : ""
                   }`
                 }

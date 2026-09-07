@@ -7,7 +7,7 @@ import { currencyColor, formatCurrency } from "../utils/format";
 import SearchBar from "../components/SearchBar";
 import Dropdown from "../components/Dropdown";
 import Button from "../components/Button";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Pencil } from "lucide-react";
 import TransactionCard from "../components/TransactionCard";
 import { useTransactions } from "../hooks/useTransactions";
 import { CATEGORIES } from "../data/categories";
@@ -60,7 +60,7 @@ export default function Dashboard() {
 
   return (
     <Layout variant="panel">
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-stretch">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 sm:items-stretch">
         <Widget title="Current Balance">
           <div className="flex flex-wrap text-2xl items-baseline justify-between gap-2">
             <div
@@ -101,7 +101,10 @@ export default function Dashboard() {
             </div>
 
             <Link to="/edit-budget">
-              <Button variant="primary">Edit Budget</Button>
+              <Button variant="primary">
+                <Pencil size={16} aria-hidden="true" />
+                Edit Budget
+              </Button>
             </Link>
           </div>
         </Widget>

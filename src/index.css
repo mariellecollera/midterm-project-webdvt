@@ -40,9 +40,6 @@
   --color-income-bg: #d9efdc;
   --color-income-text: #2e8b4f;
 
-  --color-badge-bg: #eef0f4;
-  --color-badge-text: #33415c;
-
   --category-grocery-bg: #e4ede8;
   --category-grocery-text: #2f4a3d;
   --category-bills-bg: #e1d4d3;
@@ -55,8 +52,8 @@
   --category-subscriptions-text: #6b4f13;
   --category-transport-bg: #fff3dd;
   --category-transport-text: #bd9a5a;
-  --category-other-bg: #eaedf1;
-  --category-other-text: #3e4c5e;
+  --category-other-bg: #eef0f4;
+  --category-other-text: #33415c;
   --category-shopping-bg: #f5e4d6;
   --category-shopping-text: #aa532b;
 
@@ -87,7 +84,7 @@
   --color-tab-active-text: #ffffff;
 
   --color-btn-primary-bg: #0e2247;
-  --color-btn-primary-text: #8fadc9;
+  --color-btn-primary-text: #ffffff;
   --color-btn-secondary-bg: transparent;
   --color-btn-secondary-text: #c9d6ec;
   --color-btn-secondary-border: #8fadc9;
@@ -96,9 +93,6 @@
   --color-expense-text: #b87268;
   --color-income-bg: #1f3f2f;
   --color-income-text: #65b17f;
-
-  --color-badge-bg: #212631;
-  --color-badge-text: #9fa8b8;
 
   --category-grocery-bg: #1b2820;
   --category-grocery-text: #9fc2ae;
@@ -112,8 +106,8 @@
   --category-subscriptions-text: #e8be78;
   --category-transport-bg: #332a18;
   --category-transport-text: #e2c478;
-  --category-other-bg: #1c2430;
-  --category-other-text: #94a8b8;
+  --category-other-bg: #212631;
+  --category-other-text: #9fa8b8;
   --category-shopping-bg: #332018;
   --category-shopping-text: #e89578;
 

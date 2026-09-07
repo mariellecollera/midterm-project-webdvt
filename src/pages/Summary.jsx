@@ -301,12 +301,20 @@ export default function Summary() {
                         }}
                         aria-hidden="true"
                       />
-                      <span
-                        className="truncate text-sm font-semibold"
-                        style={{ color: "var(--color-text-primary)" }}
-                      >
-                        {row.category}
-                      </span>
+                      <div className="flex gap-1 truncate text-sm">
+                        <span
+                          className="font-semibold"
+                          style={{ color: "var(--color-text-primary)" }}
+                        >
+                          {row.category}
+                        </span>
+                        <span
+                          className="italic"
+                          style={{ color: "var(--color-text-secondary)" }}
+                        >
+                          ({row.percent}%)
+                        </span>
+                      </div>
                     </div>
                     <span
                       className="shrink-0 text-sm font-bold"

@@ -47,7 +47,9 @@ export default function Header() {
                 color: isActive
                   ? "var(--color-tab-active-text)"
                   : "var(--color-tab-inactive-text)",
-                boxShadow: isActive ? "none" : "var(--shadow-tab)",
+                boxShadow: isActive
+                  ? "var(--shadow-tab-active)"
+                  : "var(--shadow-tab-inactive)",
               })}
             >
               {tab.label}

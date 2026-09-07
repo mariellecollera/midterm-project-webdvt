@@ -22,7 +22,7 @@ import { FILTERS } from "../data/filters";
 import { CATEGORY_COLORS } from "../data/categories";
 
 export default function Summary() {
-  const { transactions } = useTransactions();
+  const { transactions, budget } = useTransactions();
   const [filter, setFilter] = useState("Daily");
   const [currentDate, setCurrentDate] = useState(todayISO());
 
@@ -74,6 +74,9 @@ export default function Summary() {
     }, [periodTransactions]);
 
   const netFlow = totalIncome - totalExpenses;
+  const budgetPercent =
+    budget > 0 ? Math.min(100, Math.round((totalExpenses / budget) * 100)) : 0;
+  const isOverBudget = budget > 0 && totalExpenses > budget;
 
   const label = useMemo(() => {
     if (filter === "Daily") return formatDisplayDate(currentDate);
@@ -143,6 +146,38 @@ export default function Summary() {
 
       <div className="mt-6">
         <Widget title="Budget Summary">
+          <div className="mt-6">
+            <div
+              className="flex items-center justify-between text-sm"
+              style={{ color: "var(--color-text-primary)" }}
+            >
+              <span>Budget Used</span>
+              <span className="text-sm font-display">
+                {formatCurrency(totalExpenses)} / {formatCurrency(budget)}
+              </span>
+            </div>
+            <div
+              className="mt-2 h-3 w-full overflow-hidden"
+              style={{ backgroundColor: "var(--color-bg-input)" }}
+            >
+              <div
+                className="h-full transition-all duration-300 ease-in-out"
+                style={{
+                  width: `${budgetPercent}%`,
+                  backgroundColor: isOverBudget
+                    ? "var(--color-expense-text)"
+                    : "var(--color-btn-primary-bg)",
+                }}
+              />
+            </div>
+            <p
+              className="mt-1 text-xs"
+              style={{ color: "var(--color-text-secondary)" }}
+            >
+              {budgetPercent}% of budget used
+            </p>
+          </div>
+
           <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
             <StatBox
               label="Total Expenses"
@@ -171,7 +206,7 @@ export default function Summary() {
       </div>
 
       <div className="mt-6">
-        <Widget title="Expenses by Category">
+        <Widget title="Spending by Category">
           {byCategory.length === 0 ? (
             <p
               className="mt-6 text-sm text-center"

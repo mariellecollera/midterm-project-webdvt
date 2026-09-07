@@ -62,7 +62,7 @@ export default function Dashboard() {
     <Layout variant="panel">
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 sm:items-stretch">
         <Widget title="Current Balance">
-          <div className="flex flex-wrap text-2xl items-baseline justify-between gap-2">
+          <div className="flex flex-wrap text-2xl items-center justify-between gap-2">
             <div
               className="flex flex-wrap items-center font-bold gap-3"
               style={{
@@ -81,7 +81,7 @@ export default function Dashboard() {
         </Widget>
 
         <Widget title="Remaining Budget">
-          <div className="flex flex-wrap text-2xl items-baseline justify-between gap-2">
+          <div className="flex flex-wrap text-2xl items-center justify-between gap-2">
             <div>
               <div
                 className="flex flex-wrap items-center font-bold gap-3"

@@ -255,16 +255,6 @@ export default function Summary() {
                         }}
                       />
                     </Pie>
-                    <Tooltip
-                      formatter={(value, name) => [formatCurrency(value), name]}
-                      wrapperStyle={{ zIndex: 50 }}
-                      contentStyle={{
-                        backgroundColor: "var(--color-bg-card)",
-                        border: "1.5px solid var(--color-border)",
-                        borderRadius: "0.5rem",
-                        color: "var(--color-text-primary)",
-                      }}
-                    />
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="pointer-events-none absolute inset-0 flex flex-col items-center justify-center">

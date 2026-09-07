@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Layout from "../components/Layout";
 import Widget from "../components/Widget";
 import TextLink from "../components/TextLink";
-import { formatCurrency } from "../utils/format";
+import { currencyColor, formatCurrency } from "../utils/format";
 import SearchBar from "../components/SearchBar";
 import Dropdown from "../components/Dropdown";
 import Button from "../components/Button";
@@ -42,6 +42,7 @@ export default function Dashboard() {
   }, [transactions]);
 
   const balance = totalIncome - totalExpenses;
+  const remBudget = budget - totalExpenses;
 
   // Filtering is recomputed only when its real inputs change (useMemo),
   // and the resulting cards are memoized individually (TransactionCard),
@@ -67,10 +68,7 @@ export default function Dashboard() {
               className="flex flex-wrap items-center font-bold gap-3"
               style={{
                 fontFamily: "var(--font-display)",
-                color:
-                  balance < 0
-                    ? "var(--color-expense-text)"
-                    : "var(--color-text-primary)",
+                color: currencyColor(balance),
               }}
             >
               {formatCurrency(balance)}
@@ -90,10 +88,10 @@ export default function Dashboard() {
                 className="flex flex-wrap items-center font-bold gap-3"
                 style={{
                   fontFamily: "var(--font-display)",
-                  color: "var(--color-text-primary)",
+                  color: currencyColor(remBudget),
                 }}
               >
-                {formatCurrency(budget - totalExpenses)}
+                {formatCurrency(remBudget)}
               </div>
               <div className="text-sm mt-1">
                 out of {formatCurrency(budget)}

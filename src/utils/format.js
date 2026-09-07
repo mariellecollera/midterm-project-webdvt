@@ -1,3 +1,9 @@
+export function currencyColor(balance) {
+  return balance < 0
+    ? "var(--color-expense-text)"
+    : "var(--color-text-primary)";
+}
+
 export function formatCurrency(amount) {
   const value = Number(amount) || 0;
   const sign = value < 0 ? "-" : "";

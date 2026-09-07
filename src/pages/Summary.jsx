@@ -8,6 +8,7 @@ import TypeToggle from "../components/TypeToggle";
 import StatBox from "../components/StatBox";
 import { useTransactions } from "../hooks/useTransactions";
 import {
+  currencyColor,
   formatCurrency,
   formatDisplayDate,
   todayISO,
@@ -193,13 +194,7 @@ export default function Summary() {
             <StatBox
               label="Net Flow"
               value={formatCurrency(netFlow)}
-              valueColor={
-                netFlow === 0
-                  ? "var(--color-display)"
-                  : netFlow < 0
-                    ? "var(--color-expense-text)"
-                    : "var(--color-income-text)"
-              }
+              valueColor={currencyColor(netFlow)}
             />
           </div>
         </Widget>

@@ -50,8 +50,7 @@ export default function Dashboard() {
   const filteredTransactions = useMemo(() => {
     const query = search.trim().toLowerCase();
     return transactions.filter((t) => {
-      const matchesSearch =
-        !query || t.name.toLowerCase().includes(query);
+      const matchesSearch = !query || t.name.toLowerCase().includes(query);
       const matchesType = typeFilter === "All" || t.type === typeFilter;
       const matchesCategory =
         categoryFilter === "All" || t.category === categoryFilter;
@@ -94,7 +93,10 @@ export default function Dashboard() {
                 {formatCurrency(remBudget)}
               </div>
               <div className="text-sm mt-1">
-                out of {formatCurrency(budget)}
+                out of{" "}
+                <span className="text-xs font-display">
+                  {formatCurrency(budget)}
+                </span>
               </div>
             </div>
 

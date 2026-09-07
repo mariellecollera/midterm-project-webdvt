@@ -150,7 +150,7 @@ export default function AddTransaction() {
               min="0"
               value={form.amount}
               onChange={(v) => setField("amount", v)}
-              placeholder="₱0.00"
+              placeholder="0.00"
               error={errors.amount}
             />
           </div>

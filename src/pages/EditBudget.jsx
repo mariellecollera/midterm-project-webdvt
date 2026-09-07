@@ -88,7 +88,7 @@ export default function EditBudget() {
             min="0"
             value={form.budget}
             onChange={(v) => setField("budget", v)}
-            placeholder="₱0.00"
+            placeholder="0.00"
             error={errors.budget}
           />
         </div>

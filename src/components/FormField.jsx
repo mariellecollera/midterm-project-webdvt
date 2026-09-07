@@ -25,10 +25,19 @@ export function TextInput({
 }) {
   const inputRef = useRef(null);
   const isDate = type === "date";
+  const isCurrency = type === "number";
 
   return (
     <div>
-      <div className={isDate ? "relative" : undefined}>
+      <div className={isDate || isCurrency ? "relative" : undefined}>
+        {isCurrency && (
+          <span
+            className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-sm"
+            style={{ color: "var(--color-text-primary)" }}
+          >
+            ₱
+          </span>
+        )}
         <input
           ref={isDate ? inputRef : undefined}
           id={id}
@@ -37,7 +46,7 @@ export function TextInput({
           onChange={onChange ? (e) => onChange(e.target.value) : undefined}
           placeholder={placeholder}
           readOnly={readOnly}
-          className={`w-full rounded-xl px-4 py-3 text-sm outline-none disabled:opacity-60 ${isDate ? "pl-11" : ""}`}
+          className={`w-full rounded-xl px-4 py-3 text-sm outline-none disabled:opacity-60 ${isDate ? "pl-11" : ""} ${isCurrency ? "pl-8" : ""}`}
           style={{
             border: `1.5px solid ${error ? "var(--color-expense-text)" : "var(--color-border)"}`,
             color: "var(--color-text-primary)",

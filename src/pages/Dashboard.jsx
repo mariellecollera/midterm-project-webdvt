@@ -51,7 +51,7 @@ export default function Dashboard() {
     const query = search.trim().toLowerCase();
     return transactions.filter((t) => {
       const matchesSearch =
-        !query || t.description.toLowerCase().includes(query);
+        !query || t.name.toLowerCase().includes(query);
       const matchesType = typeFilter === "All" || t.type === typeFilter;
       const matchesCategory =
         categoryFilter === "All" || t.category === categoryFilter;

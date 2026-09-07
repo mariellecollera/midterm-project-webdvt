@@ -32,7 +32,7 @@ function TransactionCard({ transaction }) {
           className="truncate font-display text-sm font-bold"
           style={{ color: "var(--color-text-primary)" }}
         >
-          {transaction.description}
+          {transaction.name}
         </p>
         <div className="mt-2 flex items-center gap-2">
           <span

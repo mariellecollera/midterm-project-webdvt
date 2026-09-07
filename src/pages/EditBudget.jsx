@@ -5,7 +5,7 @@ import Button from "../components/Button";
 import TextLink from "../components/TextLink";
 import Modal from "../components/Modal";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactions } from "../context/TransactionsContext";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { useToast } from "../context/ToastContext";
 

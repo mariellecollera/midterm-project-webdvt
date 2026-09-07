@@ -6,7 +6,7 @@ import TextLink from "../components/TextLink";
 import Modal from "../components/Modal";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactions } from "../context/TransactionsContext";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";

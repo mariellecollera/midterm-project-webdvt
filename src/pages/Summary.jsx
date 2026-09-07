@@ -6,7 +6,7 @@ import Widget from "../components/Widget";
 import ThemeToggle from "../components/ThemeToggle";
 import TypeToggle from "../components/TypeToggle";
 import StatBox from "../components/StatBox";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactions } from "../context/TransactionsContext";
 import {
   currencyColor,
   formatCurrency,

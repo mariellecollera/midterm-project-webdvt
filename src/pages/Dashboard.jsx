@@ -9,7 +9,7 @@ import Dropdown from "../components/Dropdown";
 import Button from "../components/Button";
 import { ArrowRight, Pencil } from "lucide-react";
 import TransactionCard from "../components/TransactionCard";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactions } from "../context/TransactionsContext";
 import { CATEGORIES } from "../data/categories";
 
 const TYPE_OPTIONS = [

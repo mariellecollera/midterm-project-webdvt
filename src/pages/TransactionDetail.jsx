@@ -12,7 +12,7 @@ import {
 } from "../data/categories";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
-import { useTransactions } from "../hooks/useTransactions";
+import { useTransactions } from "../context/TransactionsContext";
 import { useClickOutside } from "../hooks/useClickOutside";
 import { CATEGORIES } from "../data/categories";
 import { formatCurrency, formatDisplayDate } from "../utils/format";

@@ -157,14 +157,17 @@ export default function AddTransaction() {
           </div>
         </div>
 
-        <div className="mt-8 flex items-center justify-between">
-          <p
-            className="text-sm italic"
-            style={{ color: "var(--color-text-muted)" }}
-          >
-            "Tame thy tempers." – Kier Eagan
-          </p>
-          <div className="flex gap-3">
+        <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <p
+              className="text-sm italic"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              "Tame thy tempers." – Kier Eagan
+            </p>
+          </div>
+
+          <div className="flex gap-3 self-end sm:self-auto">
             <Button type="submit" variant="primary">
               Save
             </Button>

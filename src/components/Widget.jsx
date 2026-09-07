@@ -12,7 +12,7 @@ export default function Widget({ title, children }) {
         style={{ border: "1.5px solid var(--color-border)" }}
       >
         <span
-          className="font-display text-md"
+          className="font-display text-sm"
           style={{ color: "var(--color-text-primary)" }}
         >
           {title}

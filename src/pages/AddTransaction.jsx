@@ -80,10 +80,7 @@ export default function AddTransaction() {
         confirmLabel="Discard"
         cancelLabel="Keep Editing"
       />
-      <TextLink onClick={() => navigate(-1)} className="mb-4">
-        <ArrowLeft size={16} aria-hidden="true" />
-        Back
-      </TextLink>
+
       <form onSubmit={handleSubmit} noValidate>
         <h1
           className="font-display text-xl font-bold"

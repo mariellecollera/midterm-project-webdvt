@@ -15,7 +15,7 @@ import { TYPES } from "../data/types";
 import { ArrowLeft } from "lucide-react";
 
 const EMPTY_FORM = {
-  description: "",
+  name: "",
   date: todayISO(),
   type: "Expense",
   category: "",
@@ -37,8 +37,7 @@ export default function AddTransaction() {
 
   function validate() {
     const nextErrors = {};
-    if (!form.description.trim())
-      nextErrors.description = "Description is required.";
+    if (!form.name.trim()) nextErrors.name = "Name is required.";
     if (!form.date) nextErrors.date = "Date is required.";
     if (!form.category) nextErrors.category = "Category is required.";
     const amountNumber = Number(form.amount);
@@ -54,7 +53,7 @@ export default function AddTransaction() {
     if (!validate()) return;
 
     addTransaction({
-      description: form.description.trim(),
+      name: form.name.trim(),
       date: form.date,
       type: form.type,
       category: form.category,
@@ -101,13 +100,13 @@ export default function AddTransaction() {
         </h1>
 
         <div className="mt-6">
-          <FieldLabel htmlFor="description">Description</FieldLabel>
+          <FieldLabel htmlFor="transaction-name">Name</FieldLabel>
           <TextInput
-            id="description"
-            value={form.description}
-            onChange={(v) => setField("description", v)}
+            id="transaction-name"
+            value={form.name}
+            onChange={(v) => setField("name", v)}
             placeholder="e.g. Grocery Run"
-            error={errors.description}
+            error={errors.name}
           />
         </div>
 

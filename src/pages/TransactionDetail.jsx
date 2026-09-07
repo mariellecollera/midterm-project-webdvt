@@ -37,7 +37,7 @@ export default function TransactionDetail() {
   useEffect(() => {
     if (transaction) {
       setForm({
-        description: transaction.description,
+        name: transaction.name,
         date: transaction.date,
         type: transaction.type,
         category: transaction.category,
@@ -74,8 +74,7 @@ export default function TransactionDetail() {
 
   function validate() {
     const nextErrors = {};
-    if (!form.description.trim())
-      nextErrors.description = "Description is required.";
+    if (!form.name.trim()) nextErrors.name = "Name is required.";
     if (!form.date) nextErrors.date = "Date is required.";
     if (!form.category) nextErrors.category = "Category is required.";
     const amountNumber = Number(form.amount);
@@ -90,7 +89,7 @@ export default function TransactionDetail() {
     e.preventDefault();
     if (!validate()) return;
     updateTransaction(transaction.id, {
-      description: form.description.trim(),
+      name: form.name.trim(),
       date: form.date,
       type: form.type,
       category: form.category,
@@ -148,12 +147,12 @@ export default function TransactionDetail() {
           </div>
 
           <div className="mt-6">
-            <FieldLabel htmlFor="description">Description</FieldLabel>
+            <FieldLabel htmlFor="transaction-name">Name</FieldLabel>
             <TextInput
-              id="description"
-              value={form.description}
-              onChange={(v) => setField("description", v)}
-              error={errors.description}
+              id="transaction-name"
+              value={form.name}
+              onChange={(v) => setField("name", v)}
+              error={errors.name}
             />
           </div>
 
@@ -242,7 +241,7 @@ export default function TransactionDetail() {
                   backgroundColor: "var(--color-btn-primary-bg)",
                 }}
               />
-              {transaction.description}
+              {transaction.name}
             </h1>
           </div>
 

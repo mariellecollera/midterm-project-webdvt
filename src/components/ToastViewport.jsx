@@ -1,23 +1,3 @@
-function toastStyle(type) {
-  switch (type) {
-    case "success":
-      return {
-        backgroundColor: "var(--color-income-bg)",
-        color: "var(--color-income-text)",
-      };
-    case "error":
-      return {
-        backgroundColor: "var(--color-expense-bg)",
-        color: "var(--color-expense-text)",
-      };
-    default:
-      return {
-        backgroundColor: "var(--color-btn-primary-bg)",
-        color: "var(--color-btn-primary-text)",
-      };
-  }
-}
-
 export default function ToastViewport({ toasts, onDismiss }) {
   if (toasts.length === 0) return null;
 
@@ -31,8 +11,11 @@ export default function ToastViewport({ toasts, onDismiss }) {
         <div
           key={toast.id}
           role="status"
-          className="toast-enter flex items-center gap-3 rounded-full px-5 py-3 text-sm font-semibold font-display shadow-lg"
-          style={toastStyle(toast.type)}
+          className="toast-enter flex items-center gap-3 rounded-full px-5 py-3 text-sm font-display shadow-lg"
+          style={{
+            backgroundColor: "var(--color-tab-inactive-bg)",
+            color: "var(--color-btn-primary-text)",
+          }}
         >
           <span>{toast.message}</span>
           <button

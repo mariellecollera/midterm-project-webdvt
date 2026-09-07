@@ -1,6 +1,11 @@
 export function formatCurrency(amount) {
   const value = Number(amount) || 0;
-  return `₱${value.toLocaleString("en-PH", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+  const sign = value < 0 ? "-" : "";
+  const formatted = Math.abs(value).toLocaleString("en-PH", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+  return `${sign}₱${formatted}`;
 }
 
 export function formatNumericDate(isoDate) {

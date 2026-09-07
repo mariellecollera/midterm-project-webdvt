@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Cell, Pie, PieChart, ResponsiveContainer, Tooltip } from "recharts";
+import { Pie, PieChart, ResponsiveContainer, Sector, Tooltip } from "recharts";
 import Layout from "../components/Layout";
 import Widget from "../components/Widget";
 import ThemeToggle from "../components/ThemeToggle";
@@ -152,7 +152,7 @@ export default function Summary() {
               style={{ color: "var(--color-text-primary)" }}
             >
               <span>Budget Used</span>
-              <span className="text-sm font-display">
+              <span className="text-sm font-display font-semibold ">
                 {formatCurrency(totalExpenses)} / {formatCurrency(budget)}
               </span>
             </div>
@@ -171,7 +171,7 @@ export default function Summary() {
               />
             </div>
             <p
-              className="mt-1 text-xs"
+              className="mt-1 italic text-xs"
               style={{ color: "var(--color-text-secondary)" }}
             >
               {budgetPercent}% of budget used
@@ -231,10 +231,33 @@ export default function Summary() {
                       paddingAngle={1}
                       stroke="var(--color-bg-card)"
                       strokeWidth={2}
+                      shape={(props) => (
+                        <Sector
+                          cx={props.cx}
+                          cy={props.cy}
+                          innerRadius={props.innerRadius}
+                          outerRadius={props.outerRadius}
+                          startAngle={props.startAngle}
+                          endAngle={props.endAngle}
+                          fill={props.payload.color}
+                          stroke={props.stroke}
+                          strokeWidth={props.strokeWidth}
+                        />
+                      )}
                     >
-                      {byCategory.map((row) => (
-                        <Cell key={row.category} fill={row.color} />
-                      ))}
+                      <Tooltip
+                        formatter={(value, name) => [
+                          formatCurrency(value),
+                          name,
+                        ]}
+                        wrapperStyle={{ zIndex: 50 }}
+                        contentStyle={{
+                          backgroundColor: "var(--color-bg-card)",
+                          border: "1.5px solid var(--color-border)",
+                          borderRadius: "0.5rem",
+                          color: "var(--color-text-primary)",
+                        }}
+                      />
                     </Pie>
                     <Tooltip
                       formatter={(value, name) => [formatCurrency(value), name]}
@@ -280,7 +303,7 @@ export default function Summary() {
                       />
                       <span
                         className="truncate text-sm font-semibold"
-                        style={{ color: "var(--color-text-secondary)" }}
+                        style={{ color: "var(--color-text-primary)" }}
                       >
                         {row.category}
                       </span>

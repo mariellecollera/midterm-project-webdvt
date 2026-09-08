@@ -2,7 +2,6 @@ import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Layout from "../components/Layout";
 import Button from "../components/Button";
-import TextLink from "../components/TextLink";
 import Modal from "../components/Modal";
 import TypeToggle from "../components/TypeToggle";
 import { FieldLabel, TextInput, SelectInput } from "../components/FormField";
@@ -12,7 +11,6 @@ import { CATEGORIES } from "../data/categories";
 import { todayISO } from "../utils/format";
 import { useToast } from "../context/ToastContext";
 import { TYPES } from "../data/typetoggle";
-import { ArrowLeft } from "lucide-react";
 
 const EMPTY_FORM = {
   name: "",
